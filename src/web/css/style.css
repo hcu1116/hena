@@ -1,0 +1,574 @@
+/* ============================================
+   HENA — 디자인 시스템
+   헬스케어 + 희귀병 정보 포털
+   ============================================ */
+
+/* --- CSS 변수 (테마) --- */
+:root {
+  /* 색상 — 신뢰감 있는 청록 계열 + 따뜻한 액센트 */
+  --color-bg: #fbfcfd;
+  --color-surface: #ffffff;
+  --color-primary: #0d7d7d;        /* 메인 청록 (의료/신뢰) */
+  --color-primary-dark: #095a5a;
+  --color-primary-light: #e6f4f4;
+  --color-accent: #f0784b;          /* 따뜻한 코랄 (생명/경고) */
+  --color-text: #1a2e35;
+  --color-text-soft: #5a6e75;
+  --color-border: #e4eaec;
+  --color-warning-bg: #fef6f2;
+  --color-warning-border: #f0784b;
+
+  /* 타이포그래피 */
+  --font-display: 'Gowun Batang', 'Noto Serif KR', serif;
+  --font-body: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+
+  /* 간격 */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+
+  /* 기타 */
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(13, 125, 125, 0.08);
+  --shadow-hover: 0 8px 36px rgba(13, 125, 125, 0.15);
+  --max-width: 1100px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- 폰트 임포트 --- */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* --- 리셋 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- 배경 패턴 (은은한 헬스케어 분위기) --- */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(13, 125, 125, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(240, 120, 75, 0.04) 0%, transparent 40%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* --- 컨테이너 --- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* ============================================
+   헤더 / 네비게이션
+   ============================================ */
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 100;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.logo::before {
+  content: '◐';
+  font-size: 1.3rem;
+  color: var(--color-accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--color-text-soft);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   히어로 섹션
+   ============================================ */
+.hero {
+  padding: var(--space-xl) 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+  animation: fadeUp 0.8s ease;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+
+.hero h1 .highlight {
+  color: var(--color-primary);
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--color-text-soft);
+  max-width: 600px;
+  margin: 0 auto var(--space-md);
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-primary);
+  color: white;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition);
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.hero-cta:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ============================================
+   섹션 공통
+   ============================================ */
+.section {
+  padding: var(--space-lg) 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--space-xs);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-lg);
+}
+
+/* ============================================
+   질병 카드 그리드
+   ============================================ */
+.disease-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.disease-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.disease-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--transition);
+}
+
+.disease-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.disease-card:hover::before {
+  transform: scaleY(1);
+}
+
+.disease-card.coming-soon {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.disease-card .card-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.disease-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.disease-card .card-en {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-sm);
+}
+
+.disease-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+}
+
+.disease-card .card-tag {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.badge-soon {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: var(--color-border);
+  color: var(--color-text-soft);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+/* ============================================
+   질병 상세 페이지
+   ============================================ */
+.detail-hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.detail-hero .breadcrumb {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: var(--space-sm);
+}
+
+.detail-hero .breadcrumb a {
+  color: white;
+  text-decoration: none;
+}
+
+.detail-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 0.3rem;
+}
+
+.detail-hero .subtitle-en {
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+.detail-content {
+  padding: var(--space-lg) 0;
+}
+
+.content-block {
+  margin-bottom: var(--space-lg);
+  scroll-margin-top: 90px;
+}
+
+.content-block h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: var(--space-sm);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.content-block h2 .icon {
+  color: var(--color-primary);
+}
+
+.content-block p {
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+.content-block ul {
+  margin: var(--space-sm) 0;
+  padding-left: 1.5rem;
+}
+
+.content-block li {
+  margin-bottom: 0.5rem;
+}
+
+/* 정보 박스 */
+.info-box {
+  background: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+/* 경고 박스 */
+.warning-box {
+  background: var(--color-warning-bg);
+  border-left: 4px solid var(--color-warning-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+.warning-box h3 {
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+/* 웨어러블 신호 테이블 */
+.signal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.signal-table th,
+.signal-table td {
+  padding: 0.9rem var(--space-sm);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.signal-table th {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 500;
+}
+
+.signal-table tr:last-child td {
+  border-bottom: none;
+}
+
+.signal-table .yes {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.signal-table .no {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* 목차 (사이드) */
+.toc {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.toc h4 {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toc ul {
+  list-style: none;
+}
+
+.toc li {
+  margin-bottom: 0.5rem;
+}
+
+.toc a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color var(--transition);
+}
+
+.toc a:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   면책 / 푸터
+   ============================================ */
+.disclaimer {
+  background: #f4f6f7;
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin: var(--space-lg) 0;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+}
+
+.footer {
+  background: var(--color-text);
+  color: rgba(255, 255, 255, 0.7);
+  padding: var(--space-lg) 0 var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.footer h4 {
+  color: white;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: var(--space-xs);
+}
+
+.footer p {
+  font-size: 0.9rem;
+  max-width: 300px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: var(--space-md);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   애니메이션
+   ============================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 스크롤 등장 효과용 */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   반응형
+   ============================================ */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: var(--space-sm);
+    font-size: 0.85rem;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+  .hero {
+    padding: var(--space-lg) 0;
+  }
+  .section {
+    padding: var(--space-md) 0;
+  }
+  .footer-content {
+    flex-direction: column;
+  }
+}

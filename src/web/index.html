@@ -3,82 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HENA — 희귀 질환과 웨어러블 헬스케어</title>
+  <title>HENA — 희귀 수면·신경 질환 정보 포털</title>
+  <meta name="description" content="기면증을 비롯한 희귀 수면·신경 질환의 정보를 제공하고, 웨어러블 기술로 일상의 위험을 미리 감지하는 가능성을 탐구합니다.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header">
+
+  <!-- ===== 헤더 ===== -->
+  <header class="header" id="site-header">
     <nav class="nav">
       <a href="index.html" class="logo">HENA</a>
       <ul class="nav-links">
         <li><a href="#diseases">질환 정보</a></li>
         <li><a href="#about">소개</a></li>
-        <li><a href="diseases/narcolepsy.html">기면증</a></li>
+        <li><a href="diseases/narcolepsy.html">기면증 →</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- ===== 히어로 ===== -->
   <section class="hero">
+    <!-- ECG 파형 배경 애니메이션 -->
+    <div class="hero-ecg" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- ECG 파형 (두 번 반복해서 이음새 없이 연결) -->
+        <polyline
+          points="
+            0,60 80,60 100,60 110,20 120,100 130,10 140,110 150,60
+            230,60 250,60 260,20 270,100 280,10 290,110 300,60
+            380,60 400,60 410,20 420,100 430,10 440,110 450,60
+            530,60 550,60 560,20 570,100 580,10 590,110 600,60
+            600,60 680,60 700,60 710,20 720,100 730,10 740,110 750,60
+            830,60 850,60 860,20 870,100 880,10 890,110 900,60
+            980,60 1000,60 1010,20 1020,100 1030,10 1040,110 1050,60
+            1130,60 1150,60 1160,20 1170,100 1180,10 1190,110 1200,60
+          "
+          stroke="#0d7d7d"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+        />
+      </svg>
+    </div>
+
     <div class="container">
-      <span class="hero-badge">Health · Rare Disease · Wearable</span>
+      <span class="hero-badge">Health · Rare Disease · Wearable AI</span>
       <h1>희귀 질환을 이해하고,<br><span class="highlight">기술로 일상을 지키다</span></h1>
-      <p>HENA는 기면증을 비롯한 희귀 수면·신경 질환의 정보와, 웨어러블 기술로 환자의 일상을 더 안전하게 만들 수 있는 가능성을 정리합니다.</p>
-      <a href="diseases/narcolepsy.html" class="hero-cta">기면증부터 살펴보기 →</a>
+      <p>HENA는 기면증을 비롯한 희귀 수면·신경 질환의 정보와,<br>웨어러블 기술로 환자의 일상을 더 안전하게 만들 가능성을 탐구합니다.</p>
+      <div class="hero-actions">
+        <a href="diseases/narcolepsy.html" class="hero-cta">기면증부터 살펴보기 →</a>
+        <a href="#about" class="hero-cta-ghost">HENA 소개</a>
+      </div>
     </div>
   </section>
 
+  <!-- ===== 통계 섹션 ===== -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <!-- featured: 가장 충격적인 숫자 앞에 크게 -->
+        <div class="stat-item featured reveal">
+          <div class="stat-number">
+            <span class="stat-count" data-target="8">0</span>
+            <span class="stat-unit">년</span>
+          </div>
+          <div class="stat-label">진단까지 걸리는 평균 시간</div>
+          <div class="stat-sub">증상이 나타난 후 확진을 받기까지</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="stat-count" data-target="20000">0</span>
+            <span class="stat-unit">명</span>
+          </div>
+          <div class="stat-label">한국 기면증<br>추정 환자</div>
+          <div class="stat-sub">희귀질환 등록 기준</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="stat-count" data-target="100">0</span>
+            <span class="stat-unit">억+</span>
+          </div>
+          <div class="stat-label">국내 치료제<br>시장 규모</div>
+          <div class="stat-sub">2030년 1.8억 달러 전망</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">
+            <span class="stat-count" data-target="24">0</span>
+            <span class="stat-unit">시간</span>
+          </div>
+          <div class="stat-label">위험이 존재하는<br>시간</div>
+          <div class="stat-sub">수면 중에도, 각성 중에도</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 질환 정보관 ===== -->
   <section class="section" id="diseases">
     <div class="container">
-      <h2 class="section-title">질환 정보관</h2>
-      <p class="section-subtitle">하나씩 차곡차곡 쌓아가는 희귀 질환 아카이브</p>
-      <div class="disease-grid">
+      <p class="section-eyebrow reveal">Disease Archive</p>
+      <h2 class="section-title reveal">질환 정보관</h2>
+      <p class="section-subtitle reveal">하나씩 차곡차곡 쌓아가는 희귀 질환 아카이브</p>
+
+      <div class="disease-grid reveal-stagger">
         <a href="diseases/narcolepsy.html" class="disease-card">
-          <div class="card-icon">🌙</div>
+          <div class="card-top-bar"></div>
+          <span class="card-icon">🌙</span>
           <h3>기면증</h3>
           <div class="card-en">Narcolepsy</div>
-          <p>각성을 유지하는 뇌 신경물질의 결핍으로 일상 속 졸음과 탈력발작이 나타나는 질환.</p>
-          <span class="card-tag">자세히 보기 →</span>
+          <p>각성을 유지하는 뇌 신경물질(하이포크레틴)의 결핍으로 일상 속 졸음과 탈력발작이 나타나는 신경계 질환.</p>
+          <div class="card-footer">
+            <span class="card-tag">자세히 보기 →</span>
+            <span class="card-badge">정리 완료</span>
+          </div>
         </a>
+
         <div class="disease-card coming-soon">
           <span class="badge-soon">준비 중</span>
-          <div class="card-icon">😮‍💨</div>
+          <span class="card-icon">😮‍💨</span>
           <h3>수면무호흡증</h3>
           <div class="card-en">Sleep Apnea</div>
-          <p>수면 중 호흡이 반복적으로 멈추는 질환. 추후 정리 예정.</p>
+          <p>수면 중 호흡이 반복적으로 멈추는 질환. 산소포화도 저하와 심혈관 합병증 위험.</p>
         </div>
+
         <div class="disease-card coming-soon">
           <span class="badge-soon">준비 중</span>
-          <div class="card-icon">🦿</div>
+          <span class="card-icon">🦿</span>
           <h3>하지불안증후군</h3>
-          <div class="card-en">RLS</div>
-          <p>다리에 불편한 감각과 움직이고 싶은 충동이 생기는 질환. 추후 정리 예정.</p>
+          <div class="card-en">Restless Legs Syndrome</div>
+          <p>다리에 불편한 감각과 움직이고 싶은 충동이 생기는 질환. 수면 진입을 방해함.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ===== Why HENA ===== -->
   <section class="section" id="about">
     <div class="container">
-      <h2 class="section-title">왜 HENA인가</h2>
-      <div class="info-box reveal">
-        <p>이 프로젝트는 기면증으로 일상을 힘겹게 살아가는 한 사람을 위한 마음에서 시작되었습니다. 불규칙한 수면 패턴, 극심한 졸음, 그리고 예기치 못한 탈력발작으로 인한 부상의 위험 — 이런 어려움을 기술로 조금이라도 덜어줄 수 있지 않을까 하는 질문에서 출발했습니다.</p>
-        <p style="margin-bottom:0;">HENA는 단순한 정보 제공을 넘어, 웨어러블 기기로 측정 가능한 생체 신호를 통해 질환의 위험 패턴을 미리 알아차릴 수 있는 가능성을 탐구합니다. 진단을 대신하는 것이 아니라, 더 빠른 인지와 전문의 상담으로 이어지는 다리가 되고자 합니다.</p>
+      <p class="section-eyebrow reveal">Our Story</p>
+      <h2 class="section-title reveal">왜 HENA인가</h2>
+
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <p>이 프로젝트는 기면증으로 일상을 힘겹게 살아가는 한 사람을 위한 마음에서 시작되었습니다. 불규칙한 수면 패턴, 극심한 졸음, 그리고 예기치 못한 탈력발작으로 인한 부상의 위험 — 이런 어려움을 기술로 조금이라도 덜어줄 수 있지 않을까 하는 질문에서 출발했습니다.</p>
+          <p>HENA는 단순한 정보 제공을 넘어, 웨어러블 기기로 측정 가능한 생체 신호를 통해 질환의 위험 패턴을 미리 알아차릴 수 있는 가능성을 탐구합니다. 진단을 대신하는 것이 아니라, 더 빠른 인지와 전문의 상담으로 이어지는 다리가 되고자 합니다.</p>
+        </div>
+
+        <div class="about-features reveal-right">
+          <div class="feature-item">
+            <div class="feature-icon">📡</div>
+            <div class="feature-text">
+              <h4>웨어러블 기반 스크리닝</h4>
+              <p>HR·HRV·SpO₂ 등 스마트워치 데이터로 이상 패턴을 감지합니다.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔬</div>
+            <div class="feature-text">
+              <h4>의학적 근거 중심</h4>
+              <p>기면증 환자의 자율신경계 이상이라는 실제 연구 기반 위에 설계합니다.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-text">
+              <h4>진단이 아닌 보조</h4>
+              <p>의료 진단을 대신하지 않습니다. 전문의 상담을 권유하는 스크리닝 도구입니다.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ===== 푸터 ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div>
           <h4>HENA</h4>
-          <p>희귀 질환과 웨어러블 헬스케어를 잇는 정보 포털.</p>
+          <p>희귀 수면·신경 질환과 웨어러블 헬스케어를 잇는 정보 포털.</p>
+          <p style="margin-top:0.5rem; font-size:0.8rem; opacity:0.5;">HE-alth Narcolepsy Assistant</p>
         </div>
         <div>
-          <p style="font-size:0.85rem;">⚠️ 본 사이트의 정보는 교육·참고 목적이며, 의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</p>
+          <h4 style="font-size:0.9rem; font-family:var(--font-body);">질환 정보</h4>
+          <ul class="footer-links">
+            <li><a href="diseases/narcolepsy.html">기면증 (Narcolepsy)</a></li>
+            <li><a href="#">수면무호흡증 (준비 중)</a></li>
+            <li><a href="#">하지불안증후군 (준비 중)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:0.9rem; font-family:var(--font-body);">프로젝트</h4>
+          <ul class="footer-links">
+            <li><a href="#about">HENA 소개</a></li>
+            <li><a href="https://github.com/hcu1116" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer-bottom">© 2026 HENA Project · Built by 황찬웅</div>
+      <div class="footer-bottom">
+        <span>© 2026 HENA Project · Built by 황찬웅</span>
+        <span>⚠️ 의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</span>
+      </div>
     </div>
   </footer>
 

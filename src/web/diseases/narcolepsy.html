@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>기면증 (Narcolepsy) — HENA</title>
+  <meta name="description" content="기면증의 원인, 증상, 웨어러블 접목 가능성을 정리한 HENA 의료 정보 페이지">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <header class="header">
+
+  <!-- ===== 헤더 ===== -->
+  <header class="header" id="site-header">
     <nav class="nav">
       <a href="../index.html" class="logo">HENA</a>
       <ul class="nav-links">
@@ -17,119 +20,299 @@
     </nav>
   </header>
 
+  <!-- ===== 히어로 ===== -->
   <section class="detail-hero">
     <div class="container">
       <div class="breadcrumb">
-        <a href="../index.html">HENA</a> / <a href="../index.html#diseases">질환 정보관</a> / 기면증
+        <a href="../index.html">HENA</a>
+        <span>/</span>
+        <a href="../index.html#diseases">질환 정보관</a>
+        <span>/</span>
+        <span>기면증</span>
       </div>
       <h1>🌙 기면증</h1>
       <div class="subtitle-en">Narcolepsy</div>
+      <div class="hero-meta">
+        <span class="hero-meta-item">⚡ NT1 · NT2</span>
+        <span class="hero-meta-item">🧠 신경계 질환</span>
+        <span class="hero-meta-item">⌚ 웨어러블 접목 가능</span>
+      </div>
     </div>
   </section>
 
+  <!-- ===== 본문 ===== -->
   <div class="detail-content">
     <div class="container">
-      <nav class="toc">
-        <h4>목차</h4>
-        <ul>
-          <li><a href="#overview">1. 기면증이란</a></li>
-          <li><a href="#types">2. 종류</a></li>
-          <li><a href="#symptoms">3. 주요 증상</a></li>
-          <li><a href="#risks">4. 일상 속 위험과 사고</a></li>
-          <li><a href="#wearable">5. 웨어러블 접목 가능성</a></li>
-          <li><a href="#caution">6. 주의사항</a></li>
-        </ul>
-      </nav>
+      <div class="detail-layout">
 
-      <div class="content-block" id="overview">
-        <h2><span class="icon">◐</span> 1. 기면증이란</h2>
-        <p>기면증은 <strong>뇌에서 '각성(깨어있음)'을 유지하는 신경전달물질이 부족해서 생기는 신경계 질환</strong>입니다.</p>
-        <p>뇌의 시상하부에는 <strong>하이포크레틴(오렉신)</strong>이라는 물질을 만드는 신경세포가 있습니다. 이 물질이 평소에 "깨어 있어라"는 신호를 보내는데, 기면증 환자는 이 신경세포가 약 5만~10만 개 사라져서 각성 신호가 약해집니다. 그 결과 깨어있음과 잠의 경계가 무너져, 낮에 갑자기 졸리거나 잠들고, 꿈 수면(REM)이 엉뚱한 때 침범하게 됩니다.</p>
-        <div class="info-box">💡 <strong>쉽게 말하면:</strong> 뇌의 "깨어있기 스위치"가 고장 나서, 잠과 각성이 제멋대로 섞이는 병입니다.</div>
+        <!-- 사이드바 (목차) -->
+        <aside class="detail-sidebar">
+          <nav class="toc">
+            <h4>목차</h4>
+            <ul>
+              <li><a href="#overview">1. 기면증이란</a></li>
+              <li><a href="#types">2. 종류</a></li>
+              <li><a href="#symptoms">3. 주요 증상</a></li>
+              <li><a href="#risks">4. 일상 속 위험</a></li>
+              <li><a href="#simulation">5. 생체신호 시뮬레이션</a></li>
+              <li><a href="#wearable">6. 웨어러블 가능성</a></li>
+              <li><a href="#caution">7. 주의사항</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- 본문 컨텐츠 -->
+        <main>
+
+          <!-- 1. 기면증이란 -->
+          <div class="content-block reveal" id="overview">
+            <h2><span class="icon">◐</span> 1. 기면증이란</h2>
+            <p>기면증은 <strong>뇌에서 '각성(깨어있음)'을 유지하는 신경전달물질이 부족해서 생기는 신경계 질환</strong>입니다.</p>
+            <p>뇌의 시상하부에는 <strong>하이포크레틴(오렉신)</strong>이라는 물질을 만드는 신경세포가 있습니다. 이 물질이 평소에 "깨어 있어라"는 신호를 보내는데, 기면증 환자는 이 신경세포가 약 5만~10만 개 사라져서 각성 신호가 약해집니다. 그 결과 깨어있음과 잠의 경계가 무너져, 낮에 갑자기 졸리거나 잠들고, 꿈 수면(REM)이 엉뚱한 때 침범하게 됩니다.</p>
+            <div class="info-box">💡 <strong>쉽게 말하면:</strong> 뇌의 "깨어있기 스위치"가 고장 나서, 잠과 각성이 제멋대로 섞이는 병입니다.</div>
+          </div>
+
+          <!-- 2. 종류 -->
+          <div class="content-block reveal" id="types">
+            <h2><span class="icon">◐</span> 2. 종류 — Type 1 vs Type 2</h2>
+            <p>국제수면장애분류(ICSD-3) 기준으로 두 가지로 나뉩니다.</p>
+            <table class="signal-table">
+              <thead>
+                <tr><th>구분</th><th>NT1 (Type 1)</th><th>NT2 (Type 2)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>탈력발작(Cataplexy)</td><td class="yes">있음</td><td class="no">없음</td></tr>
+                <tr><td>하이포크레틴</td><td>결핍 (≤110 pg/mL)</td><td>정상 또는 미확인</td></tr>
+                <tr><td>원인 이해도</td><td>명확</td><td>불명확</td></tr>
+                <tr><td>HENA 메인 타겟</td><td class="yes">⭐ 핵심</td><td>보조 타겟</td></tr>
+              </tbody>
+            </table>
+            <p>HENA가 NT1을 주로 타겟하는 이유: 탈력발작으로 인한 일상 사고(쓰러짐)가 가장 위험하고, 자율신경 이상이 뚜렷해 웨어러블로 신호를 잡기 더 유리합니다.</p>
+          </div>
+
+          <!-- 3. 주요 증상 -->
+          <div class="content-block reveal" id="symptoms">
+            <h2><span class="icon">◐</span> 3. 주요 증상</h2>
+            <p>기면증 증상은 "꿈 수면(REM)이 깨어있을 때 침범한다"로 이해하면 쉽습니다.</p>
+            <ul>
+              <li><strong>과도한 주간졸림 (EDS, Excessive Daytime Sleepiness):</strong> 낮에 견딜 수 없이 졸림. 모든 환자의 공통 증상.</li>
+              <li><strong>탈력발작 (Cataplexy):</strong> 웃음·놀람 등 강한 감정 자극에 갑자기 근육 힘이 빠짐. 심하면 전신이 무너져 쓰러짐. 의식은 있는 상태에서 몸만 무너짐.</li>
+              <li><strong>수면마비 (Sleep Paralysis):</strong> 잠들거나 깰 때 몸이 안 움직이는 상태 (흔히 "가위눌림").</li>
+              <li><strong>입면 환각 (Hypnagogic Hallucinations):</strong> 잠들 무렵의 생생한 시각·청각 환각.</li>
+            </ul>
+          </div>
+
+          <!-- 4. 일상 속 위험 -->
+          <div class="content-block reveal" id="risks">
+            <h2><span class="icon">⚠</span> 4. 일상 속 위험과 사고</h2>
+            <p>기면증의 가장 큰 위험은 <strong>예측 불가능한 시점에 발생하는 졸음과 탈력발작</strong>입니다.</p>
+            <div class="warning-box">
+              <h3>⚠️ 대표적 위험 상황</h3>
+              <ul style="margin-bottom:0;">
+                <li><strong>샤워·요리·설거지 중 탈력발작</strong> → 넘어지며 부상</li>
+                <li><strong>운전·이동 중 미세수면(Microsleep)</strong> → 교통사고 위험</li>
+                <li><strong>계단·대중교통에서 갑작스러운 졸음</strong> → 낙상 위험</li>
+                <li><strong>약물 부작용</strong> → 기억 소실, 기분 변화, 식욕 급변동</li>
+              </ul>
+            </div>
+            <p>이런 위험을 <strong>미리 알아차릴 수 있다면</strong> 일상은 훨씬 안전해질 수 있습니다. 이것이 HENA가 탐구하는 핵심 질문입니다.</p>
+          </div>
+
+          <!-- 5. 생체신호 시뮬레이션 -->
+          <div class="content-block reveal" id="simulation">
+            <h2><span class="icon">📊</span> 5. 실시간 생체신호 시뮬레이션</h2>
+            <p>기면증 환자는 <strong>자율신경계(심박·호흡·체온을 조절하는 신경)에 이상</strong>이 있습니다. 아래 시뮬레이션에서 일반인과 기면증 환자의 심박 패턴 차이를 직접 확인해보세요.</p>
+
+            <!-- HR 그래프 -->
+            <div class="simulation-section">
+              <div class="simulation-header">
+                <div class="simulation-title">
+                  심박수(HR) 실시간 비교
+                  <span class="sim-live-badge">LIVE SIM</span>
+                </div>
+                <div class="sim-controls">
+                  <button class="sim-btn active" id="btn-play">⏸ 일시정지</button>
+                  <button class="sim-btn" id="btn-reset">↺ 리셋</button>
+                </div>
+              </div>
+
+              <div class="sim-graphs">
+                <!-- 일반인 -->
+                <div class="sim-graph-wrap">
+                  <div class="sim-graph-label">
+                    <span class="sim-graph-name normal">일반인 (Normal)</span>
+                    <span class="sim-bpm normal" id="bpm-normal">-- BPM</span>
+                  </div>
+                  <canvas class="sim-canvas" id="canvas-normal" width="400" height="80"></canvas>
+                  <div class="sim-canvas-desc">안정 시 65~72 BPM · 규칙적 패턴 · 낮은 LF/HF 비율</div>
+                </div>
+
+                <!-- 기면증 -->
+                <div class="sim-graph-wrap">
+                  <div class="sim-graph-label">
+                    <span class="sim-graph-name narco">기면증 (Narcolepsy)</span>
+                    <span class="sim-bpm narco" id="bpm-narco">-- BPM</span>
+                  </div>
+                  <canvas class="sim-canvas" id="canvas-narco" width="400" height="80"></canvas>
+                  <div class="sim-canvas-desc">안정 시에도 교감신경 과활성 · 불규칙 · 높은 LF/HF 비율</div>
+                </div>
+              </div>
+
+              <div class="info-box" style="margin:0; background: rgba(13,125,125,0.15); border-left-color: #4dd9ac;">
+                <span style="color:#4dd9ac; font-weight:600;">왜 다를까요?</span>
+                <span style="color:rgba(255,255,255,0.75); font-size:0.9rem;"> 기면증 환자는 안정 시에도 교감신경("긴장 모드")이 비정상적으로 활성화되어, 심박이 더 높고 불규칙합니다. 이 패턴이 스마트워치로 측정 가능한 HRV 지표에 반영됩니다.</span>
+              </div>
+            </div>
+
+            <!-- 수면 패턴 타임라인 -->
+            <div class="simulation-section" style="margin-top:1rem;">
+              <div class="simulation-header">
+                <div class="simulation-title">
+                  24시간 수면 패턴 타임라인
+                </div>
+                <button class="timeline-play-btn" id="btn-timeline">
+                  ▶ 재생
+                </button>
+              </div>
+
+              <div class="sleep-timeline">
+                <div class="sleep-timeline-header">
+                  <span class="sleep-timeline-title">오전 6시 → 다음날 오전 6시 (24시간)</span>
+                </div>
+
+                <!-- 일반인 타임라인 -->
+                <div class="timeline-row">
+                  <div class="timeline-label">일반인</div>
+                  <div class="timeline-bar-wrap">
+                    <div class="timeline-segments" id="timeline-normal">
+                      <!-- JS로 채워짐 -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 기면증 타임라인 -->
+                <div class="timeline-row">
+                  <div class="timeline-label">기면증</div>
+                  <div class="timeline-bar-wrap">
+                    <div class="timeline-segments" id="timeline-narco">
+                      <!-- JS로 채워짐 -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 시간 축 -->
+                <div class="timeline-hours">
+                  <span>6AM</span>
+                  <span>12PM</span>
+                  <span>6PM</span>
+                  <span>12AM</span>
+                  <span>6AM</span>
+                </div>
+
+                <!-- 범례 -->
+                <div class="timeline-legend">
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#2d5a6b;"></div>
+                    <span>각성</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#0d7d7d;"></div>
+                    <span>얕은 수면</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#095a5a;"></div>
+                    <span>깊은 수면</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#1aafaf;"></div>
+                    <span>REM 수면</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#f0784b;"></div>
+                    <span>EDS (주간졸림)</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#e53e3e;"></div>
+                    <span>탈력발작</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p style="font-size:0.85rem; color:var(--color-text-soft); margin-top:1rem;">
+              ※ 위 시뮬레이션은 실제 환자 데이터가 아닌 의학 문헌 기반 시각화입니다. 개인차가 있으며 진단 목적이 아닙니다.
+            </p>
+          </div>
+
+          <!-- 6. 웨어러블 접목 가능성 -->
+          <div class="content-block reveal" id="wearable">
+            <h2><span class="icon">⌚</span> 6. 웨어러블 접목 가능성</h2>
+            <p>기면증 환자는 <strong>자율신경계에 이상</strong>이 있고, 이것이 심박변이도(HRV) 같은 지표로 나타납니다. 이런 지표들은 스마트워치로 측정할 수 있습니다.</p>
+            <div class="info-box">
+              <strong>자율신경 & HRV란?</strong><br>
+              심장이 뛰는 간격은 미세하게 변하는데, 이 변동성이 HRV입니다. 기면증 환자는 교감신경이 과활성화되어 HRV 패턴이 일반인과 다릅니다. HRV를 주파수 분석하면 LF(교감)·HF(부교감) 균형을 볼 수 있고, 기면증 환자에서는 LF/HF 비율이 높게 나타납니다.
+            </div>
+            <table class="signal-table">
+              <thead>
+                <tr><th>신호</th><th>웨어러블 측정</th><th>HENA 활용</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>심박수 (HR)</td><td class="yes">✅ 가능</td><td>핵심 입력</td></tr>
+                <tr><td>심박변이도 (HRV)</td><td class="yes">✅ 가능</td><td>핵심 입력 (LF/HF 등)</td></tr>
+                <tr><td>활동량 / 움직임</td><td class="yes">✅ 가능</td><td>수면-각성, 쓰러짐 감지</td></tr>
+                <tr><td>피부 온도</td><td class="yes">✅ 가능</td><td>자율신경 지표</td></tr>
+                <tr><td>혈중 산소 (SpO₂)</td><td class="yes">✅ 가능</td><td>보조 입력</td></tr>
+                <tr><td>하이포크레틴 수치</td><td class="no">❌ 불가</td><td>뇌척수액 검사 필요</td></tr>
+                <tr><td>MSLT (수면잠복기검사)</td><td class="no">❌ 불가</td><td>병원 전용 검사</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 7. 주의사항 -->
+          <div class="content-block reveal" id="caution">
+            <h2><span class="icon">◐</span> 7. 주의사항</h2>
+            <div class="warning-box">
+              <h3>꼭 기억하세요</h3>
+              <p style="margin-bottom:0;">기면증의 확진에는 병원의 수면검사(MSLT)나 뇌척수액 검사가 필요합니다. 웨어러블 기기는 <strong>'진단'을 할 수 없으며</strong>, 의심 패턴을 감지하고 전문의 상담을 권유하는 <strong>보조·스크리닝 도구</strong>일 뿐입니다. 증상이 있다면 반드시 수면 전문의와 상담하세요.</p>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            본 페이지의 정보는 공개된 의학 자료를 바탕으로 교육·참고 목적으로 정리한 것이며, 의학적 진단이나 치료를 대신하지 않습니다. 시뮬레이션은 이해를 돕기 위한 시각화이며 실제 환자 데이터를 기반으로 하지 않습니다.
+          </div>
+
+        </main>
       </div>
-
-      <div class="content-block" id="types">
-        <h2><span class="icon">◐</span> 2. 종류 — Type 1 vs Type 2</h2>
-        <p>국제수면장애분류(ICSD-3) 기준으로 두 가지로 나뉩니다.</p>
-        <table class="signal-table">
-          <thead><tr><th>구분</th><th>NT1 (Type 1)</th><th>NT2 (Type 2)</th></tr></thead>
-          <tbody>
-            <tr><td>탈력발작</td><td class="yes">있음</td><td class="no">없음</td></tr>
-            <tr><td>하이포크레틴</td><td>결핍 (≤110 pg/mL)</td><td>정상 또는 미확인</td></tr>
-            <tr><td>원인 이해도</td><td>명확</td><td>불명확</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="content-block" id="symptoms">
-        <h2><span class="icon">◐</span> 3. 주요 증상</h2>
-        <p>기면증 증상은 "꿈 수면(REM)이 깨어있을 때 침범한다"로 이해하면 쉽습니다.</p>
-        <ul>
-          <li><strong>과도한 주간졸림 (EDS):</strong> 낮에 견딜 수 없이 졸림. 모든 환자의 공통 증상.</li>
-          <li><strong>탈력발작 (Cataplexy):</strong> 웃음·놀람 등 강한 감정 자극에 갑자기 근육 힘이 빠짐. 심하면 전신이 무너져 쓰러짐. 의식은 있는 상태.</li>
-          <li><strong>수면마비:</strong> 잠들거나 깰 때 몸이 안 움직이는 상태 (흔히 "가위눌림").</li>
-          <li><strong>입면 환각:</strong> 잠들 무렵의 생생한 환각.</li>
-        </ul>
-      </div>
-
-      <div class="content-block" id="risks">
-        <h2><span class="icon">⚠</span> 4. 일상 속 위험과 사고</h2>
-        <p>기면증의 가장 큰 위험은 <strong>예측 불가능한 시점에 발생하는 졸음과 탈력발작</strong>입니다.</p>
-        <div class="warning-box">
-          <h3>⚠️ 대표적 위험 상황</h3>
-          <ul style="margin-bottom:0;">
-            <li><strong>샤워·요리·설거지 중 탈력발작</strong> → 넘어지며 부상</li>
-            <li><strong>운전·이동 중 미세수면</strong> → 교통사고 위험</li>
-            <li><strong>계단·대중교통에서 갑작스러운 졸음</strong> → 낙상 위험</li>
-            <li><strong>약물 부작용</strong> → 기억 문제, 기분 변화 등</li>
-          </ul>
-        </div>
-        <p>이런 위험을 <strong>미리 알아차릴 수 있다면</strong> 일상은 훨씬 안전해질 수 있습니다.</p>
-      </div>
-
-      <div class="content-block" id="wearable">
-        <h2><span class="icon">⌚</span> 5. 웨어러블 접목 가능성</h2>
-        <p>기면증 환자는 <strong>자율신경계에 이상</strong>이 있고, 이것이 심박변이도(HRV) 같은 지표로 나타납니다. 이런 지표들은 스마트워치로 측정할 수 있습니다.</p>
-        <div class="info-box"><strong>자율신경 & HRV란?</strong><br>심장이 뛰는 간격은 미세하게 변하는데, 이 변동성이 HRV입니다. 기면증 환자는 교감신경이 과활성화되어 HRV 패턴이 일반인과 다릅니다.</div>
-        <table class="signal-table">
-          <thead><tr><th>신호</th><th>웨어러블 측정</th><th>활용</th></tr></thead>
-          <tbody>
-            <tr><td>심박수 (HR)</td><td class="yes">✅ 가능</td><td>핵심 입력</td></tr>
-            <tr><td>심박변이도 (HRV)</td><td class="yes">✅ 가능</td><td>핵심 입력</td></tr>
-            <tr><td>활동량 / 움직임</td><td class="yes">✅ 가능</td><td>수면-각성, 쓰러짐 감지</td></tr>
-            <tr><td>피부 온도</td><td class="yes">✅ 가능</td><td>자율신경 지표</td></tr>
-            <tr><td>혈중 산소 (SpO₂)</td><td class="yes">✅ 가능</td><td>보조 입력</td></tr>
-            <tr><td>하이포크레틴 수치</td><td class="no">❌ 불가</td><td>뇌척수액 검사 필요</td></tr>
-            <tr><td>MSLT (수면검사)</td><td class="no">❌ 불가</td><td>병원 검사 필요</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="content-block" id="caution">
-        <h2><span class="icon">◐</span> 6. 주의사항</h2>
-        <div class="warning-box">
-          <h3>꼭 기억하세요</h3>
-          <p style="margin-bottom:0;">기면증의 확진에는 병원의 수면검사(MSLT)나 뇌척수액 검사가 필요합니다. 웨어러블 기기는 <strong>'진단'을 할 수 없으며</strong>, 의심 패턴을 감지하고 전문의 상담을 권유하는 <strong>보조·스크리닝 도구</strong>일 뿐입니다. 증상이 있다면 반드시 수면 전문의와 상담하세요.</p>
-        </div>
-      </div>
-
-      <div class="disclaimer">본 페이지의 정보는 공개된 의학 자료를 바탕으로 교육·참고 목적으로 정리한 것이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
     </div>
   </div>
 
+  <!-- ===== 푸터 ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div>
           <h4>HENA</h4>
-          <p>희귀 질환과 웨어러블 헬스케어를 잇는 정보 포털.</p>
+          <p>희귀 수면·신경 질환과 웨어러블 헬스케어를 잇는 정보 포털.</p>
         </div>
         <div>
-          <p style="font-size:0.85rem;">⚠️ 본 사이트의 정보는 교육·참고 목적이며, 의학적 진단이나 치료를 대신하지 않습니다.</p>
+          <h4 style="font-size:0.9rem; font-family:var(--font-body);">다른 질환</h4>
+          <ul class="footer-links">
+            <li><a href="#">수면무호흡증 (준비 중)</a></li>
+            <li><a href="#">하지불안증후군 (준비 중)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:0.82rem; opacity:0.6;">⚠️ 의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</p>
         </div>
       </div>
-      <div class="footer-bottom">© 2026 HENA Project · Built by 황찬웅</div>
+      <div class="footer-bottom">
+        <span>© 2026 HENA Project · Built by 황찬웅</span>
+        <a href="../index.html">← 메인으로</a>
+      </div>
     </div>
   </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/simulation.js"></script>
 </body>
 </html>

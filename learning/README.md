@@ -9,7 +9,8 @@
 | 01_basics/ | 변수, 리스트, 딕셔너리, 조건문, 반복문, f-string | ✅ 완료 |
 | 02_oop/ | 클래스, self, 생성자, 메서드 (C struct 비교) | ✅ 완료 |
 | 03_data/ | numpy 배열 연산, pandas DataFrame, 필터링 | ✅ 완료 |
-| 04_functions/ | 함수, 예외처리, 모듈 | ⏳ 예정 |
+| 04_timeseries/ | 시계열 데이터, 이동평균, matplotlib 그래프 저장 | ✅ 완료 |
+| 05_functions/ | 함수, 예외처리, 모듈 | ⏳ 예정 |
 | 03_data/ | pandas, numpy 기초 | ⏳ 예정 |
 | 04_hena/ | HENA 프로젝트 실전 적용 | ⏳ 예정 |
 

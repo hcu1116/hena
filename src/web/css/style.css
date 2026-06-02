@@ -862,8 +862,39 @@ body::before {
 
 .signal-table tr:hover td { background: var(--color-primary-light); }
 
-.signal-table .yes { color: var(--color-primary); font-weight: 600; }
-.signal-table .no { color: var(--color-accent); font-weight: 600; }
+.signal-table .yes,
+.signal-table .no {
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.signal-table .yes { color: var(--color-primary); }
+.signal-table .no  { color: var(--color-text-soft); }
+
+/* 텍스트 앞에 작은 dot */
+.signal-table .yes::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.signal-table .no::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 2px;           /* 가로 막대 — "불가"의 닫힌 느낌 */
+  border-radius: 2px;
+  background: var(--color-text-soft);
+  opacity: 0.45;
+  flex-shrink: 0;
+}
 
 /* ============================================
    생체신호 시뮬레이션

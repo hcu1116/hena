@@ -39,6 +39,10 @@ models/*.pkl
 models/*.h5
 *.weights
 
+# PhysioNet 원시 데이터 (14~70MB짜리 가속도 파일, git에 올리기 부적합)
+# 재현 방법: PhysioNet sleep-accel 데이터셋에서 wget으로 다운로드
+learning/06_realdata/data/*_acceleration.txt
+
 # ============================================
 # 비밀 정보 (절대 올리면 안 되는 것)
 # ============================================

@@ -5,39 +5,84 @@
 
 /* --- CSS 변수 (테마) --- */
 :root {
-  --color-bg: #f7fafa;
+  /* ── 배경 / 서피스 ── */
+  --color-bg: #f4f8f8;
   --color-surface: #ffffff;
+  --color-surface-raised: #fafefe;  /* 카드 위에 뜬 카드 */
+
+  /* ── Primary 팔레트 (teal) ── */
   --color-primary: #0d7d7d;
   --color-primary-dark: #095a5a;
+  --color-primary-deeper: #063f3f;  /* 가장 진한 teal */
   --color-primary-light: #e6f4f4;
   --color-primary-mid: rgba(13, 125, 125, 0.12);
+  --color-primary-glow: rgba(13, 125, 125, 0.22); /* 빛나는 halo용 */
+
+  /* ── Accent 팔레트 (coral) ── */
   --color-accent: #f0784b;
+  --color-accent-dark: #d4552a;
   --color-accent-light: #fef3ee;
-  --color-text: #1a2e35;
-  --color-text-soft: #5a6e75;
-  --color-border: #e0eaea;
+
+  /* ── 텍스트 ── */
+  --color-text: #0f2323;         /* 기존보다 더 진하게 — 대비↑ */
+  --color-text-soft: #4e6464;
+  --color-text-muted: #8aa4a4;   /* 라벨, 힌트용 */
+
+  /* ── 보더 ── */
+  --color-border: #dae8e8;
+  --color-border-subtle: rgba(13, 125, 125, 0.08);
+
+  /* ── 경고 ── */
   --color-warning-bg: #fef6f2;
   --color-warning-border: #f0784b;
 
+  /* ── 폰트 ── */
   --font-display: 'Gowun Batang', 'Noto Serif KR', serif;
   --font-body: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
+  /* ── 간격 ── */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 7rem;
 
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 6px;
-  --shadow: 0 4px 24px rgba(13, 125, 125, 0.08);
-  --shadow-hover: 0 12px 40px rgba(13, 125, 125, 0.18);
-  --shadow-card: 0 2px 12px rgba(13, 125, 125, 0.06);
+  /* ── 반경 ── */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --radius-pill: 100px;
+
+  /* ── 3단계 그림자 시스템 ──
+     xs  : 아주 얕은 테두리 느낌 (resting 카드)
+     sm  : 기본 카드 elevation
+     md  : hover 상태
+     lg  : 떠있는 요소, 모달
+     colored : 브랜드 teal tint 그림자 (버튼 등) */
+  --shadow-xs:     0 0 0 1px rgba(13,125,125,0.08), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-sm:     0 0 0 1px rgba(13,125,125,0.06), 0 2px 10px rgba(13,125,125,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:     0 0 0 1px rgba(13,125,125,0.1),  0 6px 24px rgba(13,125,125,0.1),  0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg:     0 0 0 1px rgba(13,125,125,0.08), 0 16px 48px rgba(13,125,125,0.14), 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-colored: 0 6px 24px rgba(13,125,125,0.32), 0 2px 6px rgba(13,125,125,0.2);
+
+  /* ── 그라데이션 토큰 ── */
+  --gradient-primary:   linear-gradient(135deg, #0d7d7d 0%, #1aafaf 100%);
+  --gradient-primary-v: linear-gradient(180deg, #0d9090 0%, #0d7d7d 100%);
+  --gradient-accent:    linear-gradient(135deg, #f0784b 0%, #f0b04b 100%);
+  --gradient-dark:      linear-gradient(160deg, #052e2e 0%, #0b6e6e 100%);
+  --gradient-surface:   linear-gradient(180deg, #ffffff 0%, #f4f9f9 100%);
+
+  /* ── 기타 ── */
   --max-width: 1100px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); /* 약간 튀는 spring */
+
+  /* 하위호환 별칭 (기존 코드에서 참조하는 변수) */
+  --shadow: var(--shadow-sm);
+  --shadow-hover: var(--shadow-md);
+  --shadow-card: var(--shadow-xs);
 }
 
 /* --- 폰트 임포트 --- */
@@ -123,14 +168,17 @@ body::before {
   font-weight: 700;
   color: var(--color-primary);
   text-decoration: none;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  transition: opacity var(--transition);
+  transition: all var(--transition);
 }
 
-.logo:hover { opacity: 0.8; }
+.logo:hover {
+  opacity: 0.85;
+  letter-spacing: 0.1em; /* 호버 시 자간이 살짝 벌어지는 미세한 인터랙션 */
+}
 
 .logo::before {
   content: '';
@@ -313,7 +361,8 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--color-primary);
+  /* 그라데이션: 단색보다 깊이감이 생기고 "살아있는" 느낌 */
+  background: var(--gradient-primary);
   color: white;
   padding: 0.95rem 2.2rem;
   border-radius: var(--radius-sm);
@@ -321,34 +370,38 @@ body::before {
   font-weight: 600;
   font-size: 0.95rem;
   transition: all var(--transition);
-  box-shadow: 0 4px 16px rgba(13, 125, 125, 0.3);
+  /* colored shadow: 버튼 색과 일치하는 그림자가 떠있는 느낌 강화 */
+  box-shadow: var(--shadow-colored), inset 0 1px 0 rgba(255,255,255,0.15);
+  letter-spacing: 0.01em;
 }
 
 .hero-cta:hover {
-  background: var(--color-primary-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(13, 125, 125, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(13,125,125,0.42), 0 3px 8px rgba(13,125,125,0.24),
+              inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
 .hero-cta-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
+  background: rgba(13,125,125,0.04);
   color: var(--color-primary);
   padding: 0.95rem 2.2rem;
   border-radius: var(--radius-sm);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
-  border: 1.5px solid rgba(13, 125, 125, 0.3);
+  border: 1.5px solid rgba(13,125,125,0.25);
   transition: all var(--transition);
+  box-shadow: var(--shadow-xs);
 }
 
 .hero-cta-ghost:hover {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 /* ── 히어로 비주얼 (오른쪽 대시보드 카드 영역) ── */
@@ -593,19 +646,31 @@ body::before {
    ============================================ */
 .stats-section {
   padding: var(--space-lg) 0;
-  background: #0b6e6e;
+  /* 단색 → 그라데이션: 왼쪽(밝은 teal) → 오른쪽(어두운 teal). 깊이감 생김. */
+  background: var(--gradient-dark);
   position: relative;
   overflow: hidden;
 }
 
-/* 배경: 왼쪽 상단 부드러운 빛 */
+/* 왼쪽 상단 부드러운 빛 */
 .stats-section::before {
   content: '';
   position: absolute;
   top: -60%; left: -15%;
   width: 55%;
   height: 220%;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.07) 0%, transparent 65%);
+  background: radial-gradient(ellipse, rgba(255,255,255,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* 오른쪽 하단: coral 억양 — 단조로운 teal에 리듬 추가 */
+.stats-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40%; right: -5%;
+  width: 35%;
+  height: 180%;
+  background: radial-gradient(ellipse, rgba(240,120,75,0.08) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -697,22 +762,43 @@ body::before {
   padding: var(--space-lg) 0;
 }
 
+/* eyebrow: "Disease Archive", "Our Story" 같은 섹션 상단 라벨.
+   단순 텍스트 → pill 형태로 바꾸면 섹션 시작을 명확하게 알림.
+   작은 박동 점으로 "살아있는 정보"임을 암시. */
 .section-eyebrow {
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--color-primary-light);
   color: var(--color-primary);
-  margin-bottom: 0.75rem;
+  border: 1px solid rgba(13,125,125,0.18);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: blink 2s ease-in-out infinite;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
   font-weight: 700;
   text-align: center;
   margin-bottom: var(--space-xs);
+  color: var(--color-text);
+  letter-spacing: -0.01em;   /* 큰 serif 제목은 자간을 살짝 줄여야 세련돼 보임 */
 }
 
 .section-subtitle {
@@ -720,6 +806,7 @@ body::before {
   color: var(--color-text-soft);
   margin-bottom: var(--space-lg);
   font-size: 1rem;
+  line-height: 1.7;
 }
 
 /* ============================================
@@ -732,76 +819,119 @@ body::before {
 }
 
 .disease-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--gradient-surface);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius);
   padding: var(--space-md);
   text-decoration: none;
   color: inherit;
-  transition: all var(--transition);
+  transition: all var(--transition-spring);
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  /* xs shadow: 평소에도 살짝 떠있는 느낌 */
+  box-shadow: var(--shadow-sm);
+}
+
+/* 카드 상단 그라데이션 바:
+   기존엔 hover에서만 나타났는데,
+   항상 보이되(opacity 0.35) hover에서 진하게(1.0) 바꿈 →
+   카드가 "클릭 가능한 것"임을 쉬게 인지 */
+.card-top-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--gradient-primary);
+  opacity: 0.35;
+  transition: opacity var(--transition);
+}
+
+/* 미묘한 안쪽 빛: 카드 안쪽 상단이 약간 밝아서 입체감 */
+.disease-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .disease-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(13, 125, 125, 0.04) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(13,125,125,0.05) 0%, transparent 55%);
   opacity: 0;
   transition: opacity var(--transition);
+  border-radius: var(--radius);
 }
 
 .disease-card:not(.coming-soon):hover {
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-6px);
+  border-color: rgba(13,125,125,0.25);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
 }
 
 .disease-card:not(.coming-soon):hover::after { opacity: 1; }
 
-.card-top-bar {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), #1aafaf);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--transition);
-}
-
-.disease-card:not(.coming-soon):hover .card-top-bar { transform: scaleX(1); }
+.disease-card:not(.coming-soon):hover .card-top-bar { opacity: 1; }
 
 .disease-card.coming-soon {
-  opacity: 0.5;
+  opacity: 0.48;
   pointer-events: none;
+  filter: grayscale(0.25);
 }
 
+/* 카드 아이콘: 작은 pill 배경으로 감싸서
+   이모지가 그냥 떠있지 않고 "컨테이너"가 생김 → 고급스러워짐 */
 .disease-card .card-icon {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-  display: block;
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  background: var(--color-primary-light);
+  border-radius: 14px;
+  margin-bottom: 1.2rem;
+  transition: transform var(--transition-spring);
+  position: relative;
+  z-index: 1;
+}
+
+.disease-card:not(.coming-soon):hover .card-icon {
+  transform: scale(1.08) rotate(-3deg);
 }
 
 .disease-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
+  color: var(--color-text);
+  position: relative; z-index: 1;
 }
 
+/* 영문 라벨 핵심 업그레이드:
+   - 모노 → 일반 sans-serif (모노는 코드 전용, 라벨엔 안 어울림)
+   - 자간 0.03em → 0.13em (넓은 자간이 고급 라벨의 정석)
+   - 회색 → teal (브랜드 연결)
+   - 대문자 */
 .disease-card .card-en {
-  font-size: 0.82rem;
-  color: var(--color-text-soft);
-  margin-bottom: 1rem;
-  font-family: var(--font-mono);
-  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  opacity: 0.75;
+  position: relative; z-index: 1;
 }
 
 .disease-card p {
-  font-size: 0.93rem;
+  font-size: 0.92rem;
   color: var(--color-text-soft);
-  line-height: 1.65;
+  line-height: 1.7;
+  position: relative; z-index: 1;
 }
 
 .card-footer {
@@ -810,7 +940,8 @@ body::before {
   justify-content: space-between;
   margin-top: 1.4rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-subtle);
+  position: relative; z-index: 1;
 }
 
 .card-tag {
@@ -823,27 +954,30 @@ body::before {
   transition: gap var(--transition);
 }
 
-.disease-card:not(.coming-soon):hover .card-tag { gap: 0.5rem; }
+.disease-card:not(.coming-soon):hover .card-tag { gap: 0.6rem; }
 
 .card-badge {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   background: var(--color-primary-light);
   color: var(--color-primary);
-  padding: 0.2rem 0.6rem;
-  border-radius: 100px;
-  font-weight: 500;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(13,125,125,0.15);
 }
 
 .badge-soon {
   position: absolute;
   top: var(--space-sm);
   right: var(--space-sm);
-  background: var(--color-border);
-  color: var(--color-text-soft);
-  font-size: 0.7rem;
+  background: rgba(0,0,0,0.06);
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
   padding: 0.25rem 0.65rem;
-  border-radius: 100px;
-  font-weight: 500;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 /* ============================================
@@ -875,48 +1009,61 @@ body::before {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1.2rem;
+  padding: 1.2rem 1.4rem;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-card);
+  /* 왼쪽 컬러 바: 단순 border 대신 두꺼운 teal 선이 섹션을 시각적으로 "묶어줌" */
+  border: 1px solid var(--color-border-subtle);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: var(--shadow-xs);
   transition: all var(--transition);
 }
 
 .feature-item:hover {
-  border-color: var(--color-primary);
-  transform: translateX(4px);
+  border-left-color: #1aafaf;
+  box-shadow: var(--shadow-sm);
+  transform: translateX(3px);
+  background: var(--color-primary-light);
 }
 
 .feature-icon {
-  width: 42px;
-  height: 42px;
-  background: var(--color-primary-light);
+  width: 44px;
+  height: 44px;
+  background: var(--gradient-primary);
   border-radius: var(--radius-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   flex-shrink: 0;
+  /* teal 배경 → 이모지 아이콘이 더 선명하게 도드라짐 */
+  box-shadow: 0 3px 10px rgba(13,125,125,0.3);
+  transition: transform var(--transition-spring);
+}
+
+.feature-item:hover .feature-icon {
+  transform: scale(1.06);
 }
 
 .feature-text h4 {
   font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: var(--color-text);
 }
 
 .feature-text p {
   font-size: 0.85rem;
   color: var(--color-text-soft);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* ============================================
    질환 상세 페이지
    ============================================ */
 .detail-hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #0a6868 60%, var(--color-primary-dark) 100%);
+  /* 더 극적인 그라데이션: 위는 밝은 teal, 아래로 갈수록 깊은 색 */
+  background: linear-gradient(145deg, #0d9494 0%, #0b7a7a 40%, #084f4f 80%, #052e2e 100%);
   color: white;
   padding: var(--space-xl) 0 var(--space-lg);
   position: relative;
@@ -1499,10 +1646,12 @@ canvas.sim-canvas {
 }
 
 .footer {
-  background: #111d20;
-  color: rgba(255, 255, 255, 0.6);
+  background: var(--color-primary-deeper);
+  color: rgba(255, 255, 255, 0.55);
   padding: var(--space-lg) 0 var(--space-md);
   margin-top: var(--space-xl);
+  /* 푸터 상단에 subtle gradient로 자연스러운 전환 */
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 
 .footer-content {

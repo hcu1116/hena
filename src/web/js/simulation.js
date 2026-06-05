@@ -14,7 +14,7 @@
 // - 매번 지우고(clearRect) → 새로 그림 → 물이 흐르는 듯한 효과
 
 const CANVAS_W = 400;
-const CANVAS_H = 80;
+const CANVAS_H = 140;
 const GRAPH_COLOR_NORMAL = '#4dd9ac';
 const GRAPH_COLOR_NARCO  = '#f0784b';
 
@@ -54,6 +54,18 @@ let narcoOffset = 0;
 
 // 시간에 따른 BPM 변동을 위한 위상
 let timePhase = 0;
+
+// ── EDS 이벤트 상태 ──
+// 기면증 환자에게 주기적으로 EDS(주간졸림) 에피소드가 발생:
+// BPM이 급등하고 파형이 불안정해짐.
+// interval마다 duration 동안 이벤트 활성화.
+const EDS_INTERVAL_MS  = 9000;  // 9초마다 EDS 에피소드
+const EDS_DURATION_MS  = 2500;  // 2.5초 동안 지속
+let edsStartTime   = null;      // 현재 EDS 시작 시각 (null = 비활성)
+let nextEdsTime    = EDS_INTERVAL_MS; // 다음 EDS까지 남은 ms
+let edsCount       = 0;
+let abnormalMs     = 0;         // 누적 비정상 심박 시간 (ms)
+let lastFrameTime  = null;      // 프레임 간 시간 측정용
 
 // ── 파형 데이터 생성 ──
 // offset을 기준으로 CANVAS_W 픽셀만큼의 파형 포인트를 생성
@@ -97,77 +109,180 @@ function generateWavePoints(config, offset, phase) {
 }
 
 // ── Canvas에 파형 그리기 ──
-function drawWave(config, offset, phase) {
+// inEDS: 기면증 EDS 에피소드 진행 중이면 true → 빨간 하이라이트 오버레이
+function drawWave(config, offset, phase, inEDS = false) {
   const { ctx, color } = config;
   if (!ctx) return;
 
+  const W = config.canvas.width / (window.devicePixelRatio || 1);
   const midY = CANVAS_H / 2;
 
-  ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+  ctx.clearRect(0, 0, W, CANVAS_H);
 
   // 배경 그리드라인 (수평)
   ctx.strokeStyle = 'rgba(255,255,255,0.05)';
   ctx.lineWidth = 1;
-  [midY - 20, midY, midY + 20].forEach((y) => {
+  [midY - 35, midY, midY + 35].forEach((y) => {
     ctx.beginPath();
     ctx.moveTo(0, y);
-    ctx.lineTo(CANVAS_W, y);
+    ctx.lineTo(W, y);
     ctx.stroke();
   });
 
-  // 파형
+  // EDS 에피소드 중: 우측에 빨간 경보 오버레이 (파형 위에 겹침)
+  if (inEDS) {
+    const alertWidth = W * 0.3;
+    const alertGrad = ctx.createLinearGradient(W - alertWidth, 0, W, 0);
+    alertGrad.addColorStop(0, 'rgba(229,62,62,0)');
+    alertGrad.addColorStop(1, 'rgba(229,62,62,0.18)');
+    ctx.fillStyle = alertGrad;
+    ctx.fillRect(W - alertWidth, 0, alertWidth, CANVAS_H);
+
+    // "EDS" 라벨
+    ctx.fillStyle = 'rgba(252,129,129,0.9)';
+    ctx.font = 'bold 11px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('⚡ EDS', W - 8, 16);
+  }
+
+  // 파형 포인트 생성
+  const tempCanvas = { ...config, canvas: { width: W * (window.devicePixelRatio || 1) } };
   const points = generateWavePoints(config, offset, phase);
-  ctx.beginPath();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 1.8;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
+
+  // EDS 중에는 파형 색상을 빨간색으로 전환
+  const waveColor = inEDS ? '#fc8181' : color;
 
   // 파형 아래 그라데이션 fill
   const grad = ctx.createLinearGradient(0, 0, 0, CANVAS_H);
-  grad.addColorStop(0, color.replace(')', ', 0.15)').replace('rgb', 'rgba'));
+  grad.addColorStop(0, hexToRgba(waveColor, 0.18));
   grad.addColorStop(1, 'rgba(0,0,0,0)');
 
+  ctx.beginPath();
+  ctx.strokeStyle = waveColor;
+  ctx.lineWidth = inEDS ? 2.2 : 1.8;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
   points.forEach((p, i) => {
-    if (i === 0) ctx.moveTo(p.x, p.y);
-    else ctx.lineTo(p.x, p.y);
+    // x 좌표를 실제 캔버스 너비에 맞게 스케일
+    const scaledX = (p.x / CANVAS_W) * W;
+    if (i === 0) ctx.moveTo(scaledX, p.y);
+    else ctx.lineTo(scaledX, p.y);
   });
   ctx.stroke();
 
   // 그라데이션 fill
-  ctx.lineTo(CANVAS_W, CANVAS_H);
+  const lastPt = points[points.length - 1];
+  const lastX  = (lastPt.x / CANVAS_W) * W;
+  ctx.lineTo(lastX, CANVAS_H);
   ctx.lineTo(0, CANVAS_H);
   ctx.closePath();
   ctx.fillStyle = grad;
   ctx.fill();
 }
 
+// hex 색상 → rgba 문자열 변환 헬퍼
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 // ── BPM 계산 (시간에 따라 변동) ──
-function calcBPM(config, phase) {
+// inEDS: EDS 에피소드 중이면 BPM을 급등시킴
+function calcBPM(config, phase, inEDS = false) {
   const variation = Math.sin(phase * 0.3) * config.bpmVariance;
-  return Math.round(config.baseBPM + variation);
+  const base = Math.round(config.baseBPM + variation);
+  return inEDS ? base + Math.round(15 + Math.abs(Math.sin(phase * 2)) * 10) : base;
+}
+
+// ── 상태 텍스트 결정 ──
+function getStatusText(isNarco, bpm, inEDS) {
+  if (!isNarco) {
+    if (bpm < 65) return '부교감신경 우위 · 안정적 서맥';
+    if (bpm > 75) return '약간의 심박 상승 · 정상 범위';
+    return '부교감신경 우위 · 규칙적 정상 리듬';
+  }
+  if (inEDS) return '⚡ EDS 에피소드 — 갑작스러운 졸음 발작 · 심박 급등';
+  if (bpm > 88) return '교감신경 과활성 · 심박 상승 · LF/HF↑';
+  if (bpm > 82) return '불안정한 기저 심박 · 교감신경 우위';
+  return '안정 시에도 교감신경 과활성 상태 지속';
 }
 
 // ── 메인 애니메이션 루프 ──
 // requestAnimationFrame: "다음 화면 깜빡임 때 이 함수 실행해줘"
 // 초당 약 60번 호출됨 → 부드러운 애니메이션
-function animate() {
+function animate(timestamp) {
   if (!isPlaying) return;
 
-  // 오프셋 증가 → 파형이 왼쪽으로 흘러가는 효과
-  normalOffset += 1.2;
-  narcoOffset += 1.5;   // 기면증은 약간 빠름 (HR 높음)
-  timePhase += 0.01;
+  // 프레임 간 경과 시간 계산 (ms)
+  const delta = lastFrameTime ? timestamp - lastFrameTime : 16;
+  lastFrameTime = timestamp;
 
-  drawWave(normalConfig, normalOffset, timePhase);
-  drawWave(narcoConfig, narcoOffset, timePhase * 1.3);
+  // ── EDS 이벤트 타이머 ──
+  nextEdsTime -= delta;
+  let inEDS = false;
+
+  if (edsStartTime !== null) {
+    // EDS 에피소드 진행 중
+    const elapsed = timestamp - edsStartTime;
+    if (elapsed < EDS_DURATION_MS) {
+      inEDS = true;
+      abnormalMs += delta;
+    } else {
+      // EDS 종료
+      edsStartTime = null;
+      nextEdsTime = EDS_INTERVAL_MS;
+      // 상태 텍스트 alert 클래스 제거
+      const statusEl = document.getElementById('status-narco');
+      if (statusEl) statusEl.classList.remove('alert');
+    }
+  } else if (nextEdsTime <= 0) {
+    // EDS 새로 시작
+    edsStartTime = timestamp;
+    edsCount += 1;
+    inEDS = true;
+    const statusEl = document.getElementById('status-narco');
+    if (statusEl) statusEl.classList.add('alert');
+  }
+
+  // 오프셋 증가 → 파형이 왼쪽으로 흘러가는 효과
+  // 느리게 해야 패턴 차이가 눈에 들어옴
+  normalOffset += 0.4;
+  narcoOffset += 0.5;   // 기면증은 약간 빠름 (HR 높음 → spikeInterval 짧음)
+  timePhase += 0.004;
+
+  drawWave(normalConfig, normalOffset, timePhase, false);
+  drawWave(narcoConfig,  narcoOffset,  timePhase * 1.3, inEDS);
+
+  // BPM 계산
+  const bpmNormal = calcBPM(normalConfig, timePhase, false);
+  const bpmNarco  = calcBPM(narcoConfig,  timePhase * 1.3, inEDS);
 
   // BPM 표시 업데이트
-  if (normalConfig.bpmEl) {
-    normalConfig.bpmEl.textContent = `${calcBPM(normalConfig, timePhase)} BPM`;
-  }
-  if (narcoConfig.bpmEl) {
-    narcoConfig.bpmEl.textContent = `${calcBPM(narcoConfig, timePhase)} BPM`;
+  if (normalConfig.bpmEl) normalConfig.bpmEl.textContent = `${bpmNormal} BPM`;
+  if (narcoConfig.bpmEl)  narcoConfig.bpmEl.textContent  = `${bpmNarco} BPM`;
+
+  // 상태 텍스트 업데이트
+  const statusNormal = document.getElementById('status-normal');
+  const statusNarco  = document.getElementById('status-narco');
+  if (statusNormal) statusNormal.textContent = getStatusText(false, bpmNormal, false);
+  if (statusNarco)  statusNarco.textContent  = getStatusText(true,  bpmNarco,  inEDS);
+
+  // 카운터 업데이트
+  const bpmDiff = Math.abs(bpmNarco - bpmNormal);
+  const cntDiff     = document.getElementById('cnt-bpm-diff');
+  const cntEds      = document.getElementById('cnt-eds');
+  const cntAbnormal = document.getElementById('cnt-abnormal');
+
+  if (cntDiff)     cntDiff.textContent     = `+${bpmDiff}`;
+  if (cntEds)      cntEds.textContent      = edsCount;
+  if (cntAbnormal) cntAbnormal.textContent = Math.round(abnormalMs / 1000);
+
+  // EDS 중에 카운터 색상 강조
+  if (cntDiff) {
+    cntDiff.className = `sim-counter-value ${inEDS ? 'alert-val' : 'normal-val'}`;
   }
 
   animFrameId = requestAnimationFrame(animate);
@@ -208,7 +323,10 @@ function initHRSimulation() {
       isPlaying = !isPlaying;
       btnPlay.textContent = isPlaying ? '⏸ 일시정지' : '▶ 재생';
       btnPlay.classList.toggle('active', isPlaying);
-      if (isPlaying) animate();
+      if (isPlaying) {
+        lastFrameTime = null;
+        requestAnimationFrame(animate);
+      }
     });
   }
 
@@ -217,15 +335,28 @@ function initHRSimulation() {
       normalOffset = 0;
       narcoOffset  = 0;
       timePhase    = 0;
+      edsStartTime = null;
+      nextEdsTime  = EDS_INTERVAL_MS;
+      edsCount     = 0;
+      abnormalMs   = 0;
+      lastFrameTime = null;
+      const cntDiff     = document.getElementById('cnt-bpm-diff');
+      const cntEds      = document.getElementById('cnt-eds');
+      const cntAbnormal = document.getElementById('cnt-abnormal');
+      if (cntDiff)     { cntDiff.textContent = '0'; cntDiff.className = 'sim-counter-value normal-val'; }
+      if (cntEds)      cntEds.textContent      = '0';
+      if (cntAbnormal) cntAbnormal.textContent = '0';
+      const statusNarco = document.getElementById('status-narco');
+      if (statusNarco) statusNarco.classList.remove('alert');
       if (!isPlaying) {
-        drawWave(normalConfig, 0, 0);
-        drawWave(narcoConfig, 0, 0);
+        drawWave(normalConfig, 0, 0, false);
+        drawWave(narcoConfig,  0, 0, false);
       }
     });
   }
 
   // 시작
-  animate();
+  requestAnimationFrame(animate);
 }
 
 

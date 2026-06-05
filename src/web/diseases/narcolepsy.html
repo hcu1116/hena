@@ -143,8 +143,8 @@
                     <span class="sim-graph-name normal">일반인 (Normal)</span>
                     <span class="sim-bpm normal" id="bpm-normal">-- BPM</span>
                   </div>
-                  <canvas class="sim-canvas" id="canvas-normal" width="400" height="80"></canvas>
-                  <div class="sim-canvas-desc">안정 시 65~72 BPM · 규칙적 패턴 · 낮은 LF/HF 비율</div>
+                  <canvas class="sim-canvas" id="canvas-normal" width="400" height="140"></canvas>
+                  <div class="sim-status normal-status" id="status-normal">정상 리듬 유지 중</div>
                 </div>
 
                 <!-- 기면증 -->
@@ -153,8 +153,24 @@
                     <span class="sim-graph-name narco">기면증 (Narcolepsy)</span>
                     <span class="sim-bpm narco" id="bpm-narco">-- BPM</span>
                   </div>
-                  <canvas class="sim-canvas" id="canvas-narco" width="400" height="80"></canvas>
-                  <div class="sim-canvas-desc">안정 시에도 교감신경 과활성 · 불규칙 · 높은 LF/HF 비율</div>
+                  <canvas class="sim-canvas" id="canvas-narco" width="400" height="140"></canvas>
+                  <div class="sim-status narco-status" id="status-narco">교감신경 과활성 상태</div>
+                </div>
+              </div>
+
+              <!-- 카운터 패널 -->
+              <div class="sim-counters">
+                <div class="sim-counter-item">
+                  <div class="sim-counter-value normal-val" id="cnt-bpm-diff">0</div>
+                  <div class="sim-counter-label">현재 BPM 차이</div>
+                </div>
+                <div class="sim-counter-item">
+                  <div class="sim-counter-value narco-val" id="cnt-eds">0</div>
+                  <div class="sim-counter-label">EDS 에피소드</div>
+                </div>
+                <div class="sim-counter-item">
+                  <div class="sim-counter-value narco-val" id="cnt-abnormal">0</div>
+                  <div class="sim-counter-label">비정상 심박 구간(초)</div>
                 </div>
               </div>
 

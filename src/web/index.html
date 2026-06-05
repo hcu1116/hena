@@ -23,6 +23,13 @@
 
   <!-- ===== 히어로 ===== -->
   <section class="hero">
+    <!-- 배경 레이어: 나중에 <video>로 교체할 수 있는 구조 -->
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-bg-orb hero-bg-orb--1"></div>
+      <div class="hero-bg-orb hero-bg-orb--2"></div>
+      <div class="hero-bg-orb hero-bg-orb--3"></div>
+    </div>
+
     <!-- 배경 ECG 파형 (분위기용) -->
     <div class="hero-ecg" aria-hidden="true">
       <svg viewBox="0 0 1200 100" preserveAspectRatio="none" fill="none">
@@ -37,7 +44,7 @@
             980,50 1000,50 1010,18 1020,85 1030,8 1040,92 1050,50
             1130,50 1150,50 1160,18 1170,85 1180,8 1190,92 1200,50
           "
-          stroke="#0d7d7d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
         />
       </svg>
     </div>
@@ -72,10 +79,10 @@
                 <defs>
                   <!-- 양 끝이 fade-out되는 그라데이션 -->
                   <linearGradient id="ecg-g" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%"   stop-color="#4dd9ac" stop-opacity="0"/>
-                    <stop offset="15%"  stop-color="#4dd9ac" stop-opacity="1"/>
-                    <stop offset="85%"  stop-color="#4dd9ac" stop-opacity="1"/>
-                    <stop offset="100%" stop-color="#4dd9ac" stop-opacity="0"/>
+                    <stop offset="0%"   stop-color="#4D9EFF" stop-opacity="0"/>
+                    <stop offset="15%"  stop-color="#4D9EFF" stop-opacity="1"/>
+                    <stop offset="85%"  stop-color="#4D9EFF" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#4D9EFF" stop-opacity="0"/>
                   </linearGradient>
                 </defs>
                 <polyline
@@ -116,7 +123,7 @@
               <div class="hcard-mini-label">HRV 분석</div>
               <div class="hcard-mini-value">42 ms</div>
               <div class="hcard-mini-bar">
-                <div class="hcard-mini-bar-fill" style="width:68%;background:linear-gradient(90deg,#0d7d7d,#4dd9ac)"></div>
+                <div class="hcard-mini-bar-fill" style="width:68%"></div>
               </div>
               <div class="hcard-mini-sub">RMSSD · 양호</div>
             </div>

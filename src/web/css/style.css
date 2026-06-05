@@ -184,9 +184,25 @@ body::before {
    ============================================ */
 .hero {
   padding: var(--space-xl) 0 var(--space-lg);
-  text-align: center;
   position: relative;
   overflow: hidden;
+  /* 도트 그리드: 현대 테크 사이트의 정석 배경 패턴 */
+  background-image: radial-gradient(rgba(13, 125, 125, 0.07) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+/* 도트 그리드 위에 부드러운 fade-out (엣지가 날카롭지 않게) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 50%, var(--color-bg) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 80% at 100% 50%, var(--color-bg) 0%, transparent 100%),
+    radial-gradient(ellipse 100% 30% at 50% 0%, var(--color-bg) 0%, transparent 100%),
+    radial-gradient(ellipse 100% 25% at 50% 100%, var(--color-bg) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ECG 파형 배경 */
@@ -195,16 +211,17 @@ body::before {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 120px;
+  height: 100px;
   overflow: hidden;
-  opacity: 0.12;
+  opacity: 0.06;
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero-ecg svg {
   width: 200%;
   height: 100%;
-  animation: ecg-scroll 8s linear infinite;
+  animation: ecg-scroll 12s linear infinite;
 }
 
 @keyframes ecg-scroll {
@@ -212,6 +229,23 @@ body::before {
   to { transform: translateX(-50%); }
 }
 
+/* 두 열 레이아웃:
+   왼쪽(hero-body)에 텍스트, 오른쪽(hero-visual)에 대시보드 카드.
+   비대칭(55/45) 분할이 정중앙보다 훨씬 역동적으로 보임. */
+.hero .container { position: relative; z-index: 1; }
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+.hero-body {
+  flex: 0 0 52%;
+  min-width: 0;
+}
+
+/* ── 히어로 텍스트 ── */
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -244,7 +278,7 @@ body::before {
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
   font-weight: 700;
   line-height: 1.18;
   margin-bottom: 1.4rem;
@@ -259,18 +293,18 @@ body::before {
 }
 
 .hero p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--color-text-soft);
-  max-width: 580px;
-  margin: 0 auto 2.4rem;
-  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 0 2.4rem;
+  line-height: 1.85;
   animation: fadeUp 0.8s ease 0.2s both;
 }
 
 .hero-actions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   animation: fadeUp 0.8s ease 0.3s both;
 }
@@ -315,6 +349,243 @@ body::before {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
   transform: translateY(-3px);
+}
+
+/* ── 히어로 비주얼 (오른쪽 대시보드 카드 영역) ── */
+.hero-visual {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: relative;
+  animation: fadeIn 1s ease 0.5s both;
+}
+
+/* 카드 뒤에 있는 큰 글로우 orb.
+   실제 콘텐츠가 아니라 분위기를 만드는 빛 효과. */
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px; height: 350px;
+  background: radial-gradient(ellipse, rgba(13,125,125,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 글래스모피즘 카드 기본 ──
+   Glass morphism = 반투명 + 블러.
+   배경이 비쳐 보이면서도 내용은 선명하게. */
+.hcard {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  box-shadow:
+    0 4px 24px rgba(13, 125, 125, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  position: relative;
+  z-index: 1;
+}
+
+/* 메인 카드: 심박 모니터 */
+.hcard-main {
+  padding: 1.2rem 1.4rem;
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.hcard-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.hcard-icon { font-size: 1rem; }
+
+.hcard-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+/* 빨간 LIVE 배지: 실시간 느낌을 주는 핵심 디테일 */
+.hcard-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(229, 62, 62, 0.1);
+  color: #c53030;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  letter-spacing: 0.08em;
+}
+
+.hcard-live-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: #e53e3e;
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+/* ECG 미리보기: 검은 배경으로 진짜 모니터 느낌 */
+.hcard-ecg {
+  background: #081418;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.9rem;
+  overflow: hidden;
+}
+
+.hcard-ecg svg {
+  width: 100%;
+  height: 44px;
+  display: block;
+}
+
+.hcard-metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hcard-bpm {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.hcard-bpm-num {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.hcard-bpm-unit {
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+  font-weight: 500;
+}
+
+.hcard-tag-good {
+  background: rgba(13,125,125,0.1);
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  border: 1px solid rgba(13,125,125,0.2);
+}
+
+/* 미니 카드 가로 행 */
+.hcard-row {
+  display: flex;
+  gap: 0.85rem;
+}
+
+/* 미니 카드 2개: 수면 단계 + HRV.
+   각각 다른 주기/딜레이로 떠 있어서 자연스러운 움직임. */
+.hcard-mini {
+  flex: 1;
+  padding: 1rem 1.1rem;
+  animation: floatY 6.5s ease-in-out infinite;
+  animation-delay: -1.5s;
+}
+
+.hcard-mini:last-child {
+  animation-duration: 7.5s;
+  animation-delay: -4s;
+}
+
+.hcard-mini-icon {
+  font-size: 1.05rem;
+  margin-bottom: 0.45rem;
+  display: block;
+}
+
+.hcard-mini-label {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.35rem;
+}
+
+.hcard-mini-value {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.hcard-mini-bar {
+  height: 4px;
+  background: rgba(13,125,125,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.hcard-mini-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-primary), #4dd9ac);
+  transition: width 1s ease;
+}
+
+.hcard-mini-sub {
+  font-size: 0.67rem;
+  color: var(--color-text-soft);
+}
+
+/* 떠오르는 부유 애니메이션.
+   카드마다 주기와 딜레이를 다르게 해서 살아있는 느낌을 줌. */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-9px); }
+}
+
+/* 반응형: 900px 이하에서 세로 스택 */
+@media (max-width: 900px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-body {
+    flex: none;
+    width: 100%;
+  }
+
+  .hero-body .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-body .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }
 
 /* ============================================

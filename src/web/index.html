@@ -23,38 +23,107 @@
 
   <!-- ===== 히어로 ===== -->
   <section class="hero">
-    <!-- ECG 파형 배경 애니메이션 -->
+    <!-- 배경 ECG 파형 (분위기용) -->
     <div class="hero-ecg" aria-hidden="true">
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- ECG 파형 (두 번 반복해서 이음새 없이 연결) -->
+      <svg viewBox="0 0 1200 100" preserveAspectRatio="none" fill="none">
         <polyline
           points="
-            0,60 80,60 100,60 110,20 120,100 130,10 140,110 150,60
-            230,60 250,60 260,20 270,100 280,10 290,110 300,60
-            380,60 400,60 410,20 420,100 430,10 440,110 450,60
-            530,60 550,60 560,20 570,100 580,10 590,110 600,60
-            600,60 680,60 700,60 710,20 720,100 730,10 740,110 750,60
-            830,60 850,60 860,20 870,100 880,10 890,110 900,60
-            980,60 1000,60 1010,20 1020,100 1030,10 1040,110 1050,60
-            1130,60 1150,60 1160,20 1170,100 1180,10 1190,110 1200,60
+            0,50 80,50 100,50 110,18 120,85 130,8 140,92 150,50
+            230,50 250,50 260,18 270,85 280,8 290,92 300,50
+            380,50 400,50 410,18 420,85 430,8 440,92 450,50
+            530,50 550,50 560,18 570,85 580,8 590,92 600,50
+            680,50 700,50 710,18 720,85 730,8 740,92 750,50
+            830,50 850,50 860,18 870,85 880,8 890,92 900,50
+            980,50 1000,50 1010,18 1020,85 1030,8 1040,92 1050,50
+            1130,50 1150,50 1160,18 1170,85 1180,8 1190,92 1200,50
           "
-          stroke="#0d7d7d"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          fill="none"
+          stroke="#0d7d7d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         />
       </svg>
     </div>
 
     <div class="container">
-      <span class="hero-badge">Health · Rare Disease · Wearable AI</span>
-      <h1>희귀 질환을 이해하고,<br><span class="highlight">기술로 일상을 지키다</span></h1>
-      <p>HENA는 기면증을 비롯한 희귀 수면·신경 질환의 정보와,<br>웨어러블 기술로 환자의 일상을 더 안전하게 만들 가능성을 탐구합니다.</p>
-      <div class="hero-actions">
-        <a href="diseases/narcolepsy.html" class="hero-cta">기면증부터 살펴보기 →</a>
-        <a href="#about" class="hero-cta-ghost">HENA 소개</a>
-      </div>
+      <div class="hero-inner">
+
+        <!-- 왼쪽: 텍스트 -->
+        <div class="hero-body">
+          <span class="hero-badge">Health · Rare Disease · Wearable AI</span>
+          <h1>희귀 질환을 이해하고,<br><span class="highlight">기술로 일상을 지키다</span></h1>
+          <p>HENA는 기면증을 비롯한 희귀 수면·신경 질환의 정보와, 웨어러블 기술로 환자의 일상을 더 안전하게 만들 가능성을 탐구합니다.</p>
+          <div class="hero-actions">
+            <a href="diseases/narcolepsy.html" class="hero-cta">기면증부터 살펴보기 →</a>
+            <a href="#about" class="hero-cta-ghost">HENA 소개</a>
+          </div>
+        </div>
+
+        <!-- 오른쪽: 대시보드 카드 (순수 HTML/CSS, 진짜 제품처럼 보이게) -->
+        <div class="hero-visual" aria-hidden="true">
+
+          <!-- 메인 카드: 심박 모니터 -->
+          <div class="hcard hcard-main">
+            <div class="hcard-header">
+              <span class="hcard-icon">🫀</span>
+              <span class="hcard-title">HENA Monitor</span>
+              <span class="hcard-live-badge">LIVE</span>
+            </div>
+            <!-- 검은 배경 위의 ECG 라인: 3박동이 보이도록 -->
+            <div class="hcard-ecg">
+              <svg viewBox="0 0 280 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- 양 끝이 fade-out되는 그라데이션 -->
+                  <linearGradient id="ecg-g" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="#4dd9ac" stop-opacity="0"/>
+                    <stop offset="15%"  stop-color="#4dd9ac" stop-opacity="1"/>
+                    <stop offset="85%"  stop-color="#4dd9ac" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#4dd9ac" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polyline
+                  points="
+                    0,22  12,22  17,17  20,22  24,22  28,25  32,1  36,37  40,22  47,14  57,22  93,22
+                    105,22 110,17 113,22 117,22 121,25 125,1 129,37 133,22 140,14 150,22 186,22
+                    198,22 203,17 206,22 210,22 214,25 218,1 222,37 226,22 233,14 243,22 280,22
+                  "
+                  stroke="url(#ecg-g)" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="hcard-metric-row">
+              <div class="hcard-bpm">
+                <span class="hcard-bpm-num">72</span>
+                <span class="hcard-bpm-unit">BPM</span>
+              </div>
+              <span class="hcard-tag-good">✓ 정상 범위</span>
+            </div>
+          </div>
+
+          <!-- 하단 미니 카드 2개 -->
+          <div class="hcard-row">
+            <!-- 수면 단계 카드 -->
+            <div class="hcard hcard-mini">
+              <span class="hcard-mini-icon">💤</span>
+              <div class="hcard-mini-label">수면 단계</div>
+              <div class="hcard-mini-value">N2</div>
+              <div class="hcard-mini-bar">
+                <div class="hcard-mini-bar-fill" style="width:56%"></div>
+              </div>
+              <div class="hcard-mini-sub">수면 안정 · 56%</div>
+            </div>
+            <!-- HRV 카드 -->
+            <div class="hcard hcard-mini">
+              <span class="hcard-mini-icon">📊</span>
+              <div class="hcard-mini-label">HRV 분석</div>
+              <div class="hcard-mini-value">42 ms</div>
+              <div class="hcard-mini-bar">
+                <div class="hcard-mini-bar-fill" style="width:68%;background:linear-gradient(90deg,#0d7d7d,#4dd9ac)"></div>
+              </div>
+              <div class="hcard-mini-sub">RMSSD · 양호</div>
+            </div>
+          </div>
+
+        </div><!-- /hero-visual -->
+      </div><!-- /hero-inner -->
     </div>
   </section>
 

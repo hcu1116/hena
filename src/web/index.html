@@ -69,7 +69,7 @@
           <!-- 메인 카드: 심박 모니터 -->
           <div class="hcard hcard-main">
             <div class="hcard-header">
-              <span class="hcard-icon">🫀</span>
+              <svg class="hcard-icon-svg" viewBox="0 0 26 16" fill="none" width="26" height="16" aria-hidden="true"><polyline points="0,8 5,8 7,3 9,13 11,2 13,12 15,8 26,8" stroke="rgba(77,158,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span class="hcard-title">HENA Monitor</span>
               <span class="hcard-live-badge">LIVE</span>
             </div>
@@ -109,7 +109,7 @@
           <div class="hcard-row">
             <!-- 수면 단계 카드 -->
             <div class="hcard hcard-mini">
-              <span class="hcard-mini-icon">💤</span>
+              <span class="hcard-mini-icon">SLP</span>
               <div class="hcard-mini-label">수면 단계</div>
               <div class="hcard-mini-value">N2</div>
               <div class="hcard-mini-bar">
@@ -119,7 +119,7 @@
             </div>
             <!-- HRV 카드 -->
             <div class="hcard hcard-mini">
-              <span class="hcard-mini-icon">📊</span>
+              <span class="hcard-mini-icon">HRV</span>
               <div class="hcard-mini-label">HRV 분석</div>
               <div class="hcard-mini-value">42 ms</div>
               <div class="hcard-mini-bar">
@@ -131,6 +131,140 @@
 
         </div><!-- /hero-visual -->
       </div><!-- /hero-inner -->
+    </div>
+  </section>
+
+  <!-- ===== 섹션 2: 문제 제기 ===== -->
+  <section class="problem-section" id="problem">
+    <div class="container">
+
+      <p class="problem-eyebrow reveal">The Invisible Disease</p>
+
+      <h2 class="problem-headline reveal">보이지 않는 병,</h2>
+      <p class="problem-subheadline reveal">진단까지 수년이 걸린다</p>
+
+      <div class="problem-rule reveal" aria-hidden="true"></div>
+
+      <p class="problem-body reveal">
+        뇌 속 <strong class="problem-em">5만~10만 개</strong>의 신경세포가 사라지면서
+        각성을 유지하는 신호가 무너진다.
+        증상은 겉으로 드러나지 않고, 확진에는 병원 수면검사가 반드시 필요하다.
+      </p>
+
+      <div class="problem-symptoms reveal">
+        <div class="symptom-item">
+          <span class="symptom-ko">과도한 주간졸림</span>
+          <span class="symptom-en">Excessive Daytime Sleepiness</span>
+        </div>
+        <div class="symptom-sep" aria-hidden="true"></div>
+        <div class="symptom-item">
+          <span class="symptom-ko">탈력발작</span>
+          <span class="symptom-en">Cataplexy</span>
+        </div>
+        <div class="symptom-sep" aria-hidden="true"></div>
+        <div class="symptom-item">
+          <span class="symptom-ko">수면마비</span>
+          <span class="symptom-en">Sleep Paralysis</span>
+        </div>
+        <div class="symptom-sep" aria-hidden="true"></div>
+        <div class="symptom-item">
+          <span class="symptom-ko">입면 환각</span>
+          <span class="symptom-en">Hypnagogic Hallucinations</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 섹션 3: 작동 원리 ===== -->
+  <section class="how-section" id="how-it-works">
+    <div class="container">
+      <div class="how-inner">
+
+        <!-- 왼쪽 60%: 설명 텍스트 -->
+        <div class="how-text">
+          <p class="how-eyebrow reveal">How It Works</p>
+          <h2 class="how-headline reveal">오렉신이 사라지면,<br>심장이 말한다</h2>
+          <div class="how-body">
+            <p class="reveal">기면증은 뇌의 시상하부에서 하이포크레틴(오렉신)을 만드는 신경세포가 소실되면서 시작된다. 이 물질은 교감·부교감신경의 균형 유지에 관여한다.</p>
+            <p class="reveal">신경세포가 사라지면 자율신경 조절이 흐트러진다. 안정 상태에서도 교감신경이 비정상적으로 활성화되고, 심박 간격의 변동성(HRV)에서 이상 패턴이 관찰된다.</p>
+            <p class="reveal">이 신호들은 스마트워치로 측정 가능한 HR · HRV · 피부 온도에 반영된다. 진단을 대신할 수는 없지만, 의심 패턴 스크리닝의 과학적 근거가 된다.</p>
+          </div>
+          <div class="how-tags reveal">
+            <span class="how-tag">LF/HF 비율 증가</span>
+            <span class="how-tag">HF(부교감) 감소</span>
+            <span class="how-tag">비정상 혈압 패턴</span>
+          </div>
+        </div>
+
+        <!-- 오른쪽 40%: 세로 체인 다이어그램 -->
+        <div class="how-diagram reveal">
+
+          <div class="chain-node">
+            <div class="chain-label">오렉신(하이포크레틴) 결핍</div>
+            <div class="chain-sub">시상하부 신경세포 소실</div>
+          </div>
+
+          <div class="chain-conn" aria-hidden="true"></div>
+
+          <div class="chain-node">
+            <div class="chain-label">자율신경 이상</div>
+            <div class="chain-sub">교감/부교감 균형 붕괴</div>
+          </div>
+
+          <div class="chain-conn" aria-hidden="true"></div>
+
+          <div class="chain-node">
+            <div class="chain-label">HRV 패턴 변화</div>
+            <div class="chain-sub">LF/HF 비율 증가 · HF 감소</div>
+          </div>
+
+          <div class="chain-conn chain-conn--accent" aria-hidden="true"></div>
+
+          <div class="chain-node chain-node--accent">
+            <div class="chain-label">웨어러블로 측정</div>
+            <div class="chain-sub">HR · HRV · 피부 온도 · SpO₂</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 섹션 4: HENA 사용 흐름 ===== -->
+  <section class="flow-section" id="how-to-use">
+    <div class="container">
+      <p class="flow-eyebrow reveal">How to Use HENA</p>
+      <h2 class="flow-headline reveal">착용부터<br>상담 권유까지</h2>
+
+      <div class="flow-steps reveal-stagger">
+
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <h3 class="flow-title">착용</h3>
+          <p class="flow-desc">HRV 측정이 가능한 스마트워치 등 웨어러블 기기를 착용한다.</p>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <h3 class="flow-title">측정</h3>
+          <p class="flow-desc">HR · HRV · 피부 온도 등 생체신호를 일상 속에서 연속 수집한다.</p>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <h3 class="flow-title">스크리닝</h3>
+          <p class="flow-desc">수집된 데이터에서 기면증 의심 패턴 여부를 분석한다.</p>
+        </div>
+
+        <div class="flow-step flow-step--final">
+          <div class="flow-num">04</div>
+          <h3 class="flow-title">전문의 상담 권유</h3>
+          <p class="flow-desc">진단이 아닙니다. 이상 패턴이 감지되면 전문의 상담을 권유합니다.</p>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -185,7 +319,7 @@
       <div class="disease-grid reveal-stagger">
         <a href="diseases/narcolepsy.html" class="disease-card">
           <div class="card-top-bar"></div>
-          <span class="card-icon">🌙</span>
+          <span class="card-icon">NT</span>
           <h3>기면증</h3>
           <div class="card-en">Narcolepsy</div>
           <p>각성을 유지하는 뇌 신경물질(하이포크레틴)의 결핍으로 일상 속 졸음과 탈력발작이 나타나는 신경계 질환.</p>
@@ -197,7 +331,7 @@
 
         <div class="disease-card coming-soon">
           <span class="badge-soon">준비 중</span>
-          <span class="card-icon">😮‍💨</span>
+          <span class="card-icon">SA</span>
           <h3>수면무호흡증</h3>
           <div class="card-en">Sleep Apnea</div>
           <p>수면 중 호흡이 반복적으로 멈추는 질환. 산소포화도 저하와 심혈관 합병증 위험.</p>
@@ -205,7 +339,7 @@
 
         <div class="disease-card coming-soon">
           <span class="badge-soon">준비 중</span>
-          <span class="card-icon">🦿</span>
+          <span class="card-icon">RLS</span>
           <h3>하지불안증후군</h3>
           <div class="card-en">Restless Legs Syndrome</div>
           <p>다리에 불편한 감각과 움직이고 싶은 충동이 생기는 질환. 수면 진입을 방해함.</p>
@@ -250,6 +384,67 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== 섹션 6: 근거 / 데이터 ===== -->
+  <section class="data-section" id="data">
+    <div class="container">
+      <div class="data-inner">
+
+        <!-- 왼쪽 40%: 데이터 카드 3개 -->
+        <div class="data-cards">
+          <div class="data-card reveal">
+            <div class="data-card-num data-card-num--accent">68.9%</div>
+            <div class="data-card-label">RandomForest 정확도</div>
+            <div class="data-card-sub">단일 피험자, 랜덤 분리 기준</div>
+          </div>
+          <div class="data-card reveal">
+            <div class="data-card-num">56.6%</div>
+            <div class="data-card-label">일반화 정확도</div>
+            <div class="data-card-sub">처음 보는 피험자 대상</div>
+          </div>
+          <div class="data-card reveal">
+            <div class="data-card-num">7명</div>
+            <div class="data-card-label">PhysioNet 피험자</div>
+            <div class="data-card-sub">Apple Watch 수면 데이터</div>
+          </div>
+        </div>
+
+        <!-- 오른쪽 60%: 텍스트 블록 -->
+        <div class="data-text">
+          <p class="data-eyebrow reveal">Research &amp; Findings</p>
+          <h2 class="data-headline reveal">실제 데이터로,<br>솔직하게</h2>
+          <div class="data-body">
+            <p class="reveal">PhysioNet에 공개된 실제 Apple Watch 수면 데이터 7명으로 RandomForest 모델을 훈련했다. 수면 단계 5단계 분류 과제로, 심박수·가속도 피처 4개에서 시작했다.</p>
+            <p class="reveal">단일 피험자 기준 68.9%, 처음 보는 피험자에 대한 일반화 정확도는 56.6%였다. 이 두 숫자의 차이가 "실제 새로운 사용자에게 얼마나 통하는가"를 보여준다.</p>
+            <p class="reveal">HRV 피처(RMSSD · SDNN · pNN50)를 추가해도 유의미한 향상이 없었다. 원인은 5초 간격 BPM 샘플링이다. 이렇게 계산한 HRV는 임상의 beat-to-beat ECG 기반 HRV와 다르다.</p>
+          </div>
+          <div class="data-limit reveal">
+            <div class="data-limit-label">현재 한계</div>
+            <p>웨어러블 HRV ≠ 임상 HRV. 피험자 7명, 피처 4개. 이 결과는 탐색적 실험이며, 임상적 근거가 아닙니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 섹션 8: 면책 + CTA ===== -->
+  <section class="cta-section" id="disclaimer">
+    <div class="container">
+
+      <p class="cta-eyebrow reveal">중요 안내</p>
+      <h2 class="cta-headline reveal">이것은 의료 진단이<br>아닙니다</h2>
+      <p class="cta-sub reveal">
+        증상이 의심된다면 반드시 전문의와 상담하세요.<br>
+        HENA는 스크리닝 보조 도구이며, 진단을 대신할 수 없습니다.
+      </p>
+
+      <div class="cta-buttons reveal">
+        <a href="diseases/narcolepsy.html" class="cta-btn cta-btn--blue">기면증 정보 보기 →</a>
+      </div>
+
     </div>
   </section>
 

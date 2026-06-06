@@ -6,6 +6,29 @@
   <title>기면증 (Narcolepsy) — HENA</title>
   <meta name="description" content="기면증의 원인, 증상, 웨어러블 접목 가능성을 정리한 HENA 의료 정보 페이지">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* narcolepsy.html 전용 — style.css 미수정 */
+    .box-label {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.45rem;
+    }
+
+    /* TOC ↔ 본문 간격 확장 (2rem → 4rem) */
+    .detail-layout {
+      gap: var(--space-lg);
+    }
+
+    /* 본문 좌측 내부 여백 추가 — TOC와 호흡 공간 */
+    .detail-layout > main {
+      padding-left: var(--space-sm);
+    }
+  </style>
 </head>
 <body>
 
@@ -30,12 +53,12 @@
         <span>/</span>
         <span>기면증</span>
       </div>
-      <h1>🌙 기면증</h1>
+      <h1>기면증</h1>
       <div class="subtitle-en">Narcolepsy</div>
       <div class="hero-meta">
-        <span class="hero-meta-item">⚡ NT1 · NT2</span>
-        <span class="hero-meta-item">🧠 신경계 질환</span>
-        <span class="hero-meta-item">⌚ 웨어러블 접목 가능</span>
+        <span class="hero-meta-item">NT1 · NT2</span>
+        <span class="hero-meta-item">NEUROLOGY</span>
+        <span class="hero-meta-item">WEARABLE</span>
       </div>
     </div>
   </section>
@@ -66,15 +89,15 @@
 
           <!-- 1. 기면증이란 -->
           <div class="content-block reveal" id="overview">
-            <h2><span class="icon">◐</span> 1. 기면증이란</h2>
+            <h2>1. 기면증이란</h2>
             <p>기면증은 <strong>뇌에서 '각성(깨어있음)'을 유지하는 신경전달물질이 부족해서 생기는 신경계 질환</strong>입니다.</p>
             <p>뇌의 시상하부에는 <strong>하이포크레틴(오렉신)</strong>이라는 물질을 만드는 신경세포가 있습니다. 이 물질이 평소에 "깨어 있어라"는 신호를 보내는데, 기면증 환자는 이 신경세포가 약 5만~10만 개 사라져서 각성 신호가 약해집니다. 그 결과 깨어있음과 잠의 경계가 무너져, 낮에 갑자기 졸리거나 잠들고, 꿈 수면(REM)이 엉뚱한 때 침범하게 됩니다.</p>
-            <div class="info-box">💡 <strong>쉽게 말하면:</strong> 뇌의 "깨어있기 스위치"가 고장 나서, 잠과 각성이 제멋대로 섞이는 병입니다.</div>
+            <div class="info-box"><strong class="box-label">쉽게 말하면</strong> 뇌의 "깨어있기 스위치"가 고장 나서, 잠과 각성이 제멋대로 섞이는 병입니다.</div>
           </div>
 
           <!-- 2. 종류 -->
           <div class="content-block reveal" id="types">
-            <h2><span class="icon">◐</span> 2. 종류 — Type 1 vs Type 2</h2>
+            <h2>2. 종류 — Type 1 vs Type 2</h2>
             <p>국제수면장애분류(ICSD-3) 기준으로 두 가지로 나뉩니다.</p>
             <table class="signal-table">
               <thead>
@@ -92,7 +115,7 @@
 
           <!-- 3. 주요 증상 -->
           <div class="content-block reveal" id="symptoms">
-            <h2><span class="icon">◐</span> 3. 주요 증상</h2>
+            <h2>3. 주요 증상</h2>
             <p>기면증 증상은 "꿈 수면(REM)이 깨어있을 때 침범한다"로 이해하면 쉽습니다.</p>
             <ul>
               <li><strong>과도한 주간졸림 (EDS, Excessive Daytime Sleepiness):</strong> 낮에 견딜 수 없이 졸림. 모든 환자의 공통 증상.</li>
@@ -104,10 +127,10 @@
 
           <!-- 4. 일상 속 위험 -->
           <div class="content-block reveal" id="risks">
-            <h2><span class="icon">⚠</span> 4. 일상 속 위험과 사고</h2>
+            <h2>4. 일상 속 위험과 사고</h2>
             <p>기면증의 가장 큰 위험은 <strong>예측 불가능한 시점에 발생하는 졸음과 탈력발작</strong>입니다.</p>
             <div class="warning-box">
-              <h3>⚠️ 대표적 위험 상황</h3>
+              <h3>대표적 위험 상황</h3>
               <ul style="margin-bottom:0;">
                 <li><strong>샤워·요리·설거지 중 탈력발작</strong> → 넘어지며 부상</li>
                 <li><strong>운전·이동 중 미세수면(Microsleep)</strong> → 교통사고 위험</li>
@@ -120,7 +143,7 @@
 
           <!-- 5. 생체신호 시뮬레이션 -->
           <div class="content-block reveal" id="simulation">
-            <h2><span class="icon">📊</span> 5. 실시간 생체신호 시뮬레이션</h2>
+            <h2>5. 실시간 생체신호 시뮬레이션</h2>
             <p>기면증 환자는 <strong>자율신경계(심박·호흡·체온을 조절하는 신경)에 이상</strong>이 있습니다. 아래 시뮬레이션에서 일반인과 기면증 환자의 심박 패턴 차이를 직접 확인해보세요.</p>
 
             <!-- HR 그래프 -->
@@ -174,9 +197,9 @@
                 </div>
               </div>
 
-              <div class="info-box" style="margin:0; background: rgba(13,125,125,0.15); border-left-color: #4dd9ac;">
-                <span style="color:#4dd9ac; font-weight:600;">왜 다를까요?</span>
-                <span style="color:rgba(255,255,255,0.75); font-size:0.9rem;"> 기면증 환자는 안정 시에도 교감신경("긴장 모드")이 비정상적으로 활성화되어, 심박이 더 높고 불규칙합니다. 이 패턴이 스마트워치로 측정 가능한 HRV 지표에 반영됩니다.</span>
+              <div class="info-box" style="margin:0;">
+                <strong class="box-label">왜 다를까요?</strong>
+                <span style="color:var(--color-text-soft); font-size:0.9rem;">기면증 환자는 안정 시에도 교감신경("긴장 모드")이 비정상적으로 활성화되어, 심박이 더 높고 불규칙합니다. 이 패턴이 스마트워치로 측정 가능한 HRV 지표에 반영됩니다.</span>
               </div>
             </div>
 
@@ -262,7 +285,7 @@
 
           <!-- 6. 웨어러블 접목 가능성 -->
           <div class="content-block reveal" id="wearable">
-            <h2><span class="icon">⌚</span> 6. 웨어러블 접목 가능성</h2>
+            <h2>6. 웨어러블 접목 가능성</h2>
             <p>기면증 환자는 <strong>자율신경계에 이상</strong>이 있고, 이것이 심박변이도(HRV) 같은 지표로 나타납니다. 이런 지표들은 스마트워치로 측정할 수 있습니다.</p>
             <div class="info-box">
               <strong>자율신경 & HRV란?</strong><br>
@@ -286,7 +309,7 @@
 
           <!-- 7. 주의사항 -->
           <div class="content-block reveal" id="caution">
-            <h2><span class="icon">◐</span> 7. 주의사항</h2>
+            <h2>7. 주의사항</h2>
             <div class="warning-box">
               <h3>꼭 기억하세요</h3>
               <p style="margin-bottom:0;">기면증의 확진에는 병원의 수면검사(MSLT)나 뇌척수액 검사가 필요합니다. 웨어러블 기기는 <strong>'진단'을 할 수 없으며</strong>, 의심 패턴을 감지하고 전문의 상담을 권유하는 <strong>보조·스크리닝 도구</strong>일 뿐입니다. 증상이 있다면 반드시 수면 전문의와 상담하세요.</p>
@@ -318,7 +341,7 @@
           </ul>
         </div>
         <div>
-          <p style="font-size:0.82rem; opacity:0.6;">⚠️ 의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</p>
+          <p style="font-size:0.82rem; opacity:0.6;">의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</p>
         </div>
       </div>
       <div class="footer-bottom">
@@ -330,5 +353,31 @@
 
   <script src="../js/main.js"></script>
   <script src="../js/simulation.js"></script>
+  <script>
+    // TOC 현재 섹션 자동 표시
+    (function () {
+      const sections = document.querySelectorAll('.content-block[id]');
+      const tocLinks = document.querySelectorAll('.toc a');
+      if (!sections.length || !tocLinks.length) return;
+
+      const activate = (id) => {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const target = document.querySelector(`.toc a[href="#${id}"]`);
+        if (target) target.classList.add('active');
+      };
+
+      // 뷰포트 상단 30% 진입 시 활성화 / 하단 60% 이탈 시 유지
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) activate(entry.target.id);
+        });
+      }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+
+      // 첫 로드 시 최상단 섹션 기본 활성
+      if (sections[0]) activate(sections[0].id);
+    })();
+  </script>
 </body>
 </html>

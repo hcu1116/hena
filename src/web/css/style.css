@@ -514,7 +514,7 @@ body::before {
   margin-bottom: 0.9rem;
 }
 
-.hcard-icon { font-size: 1rem; }
+.hcard-icon-svg { display: block; }
 
 .hcard-title {
   font-family: var(--font-label);
@@ -613,8 +613,13 @@ body::before {
 }
 
 .hcard-mini-icon {
-  font-size: 1.05rem;
-  margin-bottom: 0.45rem;
+  font-family: var(--font-label);
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
   display: block;
 }
 
@@ -667,6 +672,372 @@ body::before {
   .hero-body  { flex: none; width: 100%; }
   .hero-body .hero-actions { justify-content: center; }
   .hero-visual { width: 100%; max-width: 400px; margin: 0 auto; }
+}
+
+/* ============================================
+   섹션 2: 문제 제기
+   ============================================ */
+.problem-section {
+  padding: var(--space-xl) 0;
+  text-align: center;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+/* 극도로 미세한 센터 glow — 빈 공간이 살아있어 보이도록 */
+.problem-section::before {
+  content: '';
+  position: absolute;
+  top: 45%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.012) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.problem-eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+/* 헤드라인: 히어로 h1보다 확실히 크게 — 이 섹션의 핵심 펀치 */
+.problem-headline {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8.5vw, 8rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+  word-break: keep-all;
+}
+
+/* 서브헤드라인: 헤드라인보다 확연히 작고 opacity 낮춤 — 위계 대비가 멋을 만든다 */
+.problem-subheadline {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text-soft);
+  margin-bottom: 3.5rem;
+  word-break: keep-all;
+}
+
+/* 구분선: 단어와 본문 사이 호흡 */
+.problem-rule {
+  width: 44px;
+  height: 1px;
+  background: rgba(255,255,255,0.14);
+  margin: 0 auto 3rem;
+}
+
+.problem-body {
+  font-size: 0.98rem;
+  color: var(--color-text-soft);
+  line-height: 1.95;
+  max-width: 500px;
+  margin: 0 auto 4.5rem;
+}
+
+/* Electric Blue 강조 — 이 섹션에서 딱 한 곳: 신경세포 수 */
+.problem-em {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* 4대 증상 가로 행 */
+.problem-symptoms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 3rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.symptom-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 1;
+  padding: 0 1.2rem;
+}
+
+.symptom-sep {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+
+.symptom-ko {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-soft);
+  word-break: keep-all;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.symptom-en {
+  font-family: var(--font-label);
+  font-size: 0.60rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .problem-headline    { letter-spacing: -0.02em; }
+  .problem-symptoms    { flex-wrap: wrap; gap: 2rem; padding-top: 2.5rem; }
+  .symptom-sep         { display: none; }
+  .symptom-item        { flex: 0 0 calc(50% - 1rem); }
+}
+
+/* ============================================
+   섹션 3: 작동 원리
+   ============================================ */
+.how-section {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* 좌우 비대칭 분할: 3fr(텍스트) + 2fr(다이어그램) */
+.how-inner {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.how-eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+.how-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  word-break: keep-all;
+}
+
+.how-body p {
+  font-size: 0.98rem;
+  color: var(--color-text-soft);
+  line-height: 1.9;
+  margin-bottom: 1.1rem;
+}
+.how-body p:last-child { margin-bottom: 0; }
+
+/* 연구 근거 지표 태그 모음 */
+.how-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.how-tag {
+  font-family: var(--font-label);
+  font-size: 0.70rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.85rem;
+}
+
+/* ── 체인 다이어그램 (우측 40%) ── */
+.how-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.chain-node {
+  background: var(--color-surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.4rem;
+  box-shadow: var(--shadow-xs);
+}
+
+/* 마지막 노드: Electric Blue 강조 — 이 섹션의 한 곳 */
+.chain-node--accent {
+  border-color: rgba(77,158,255,0.22);
+  background: linear-gradient(135deg, rgba(77,158,255,0.06) 0%, var(--color-surface) 100%);
+  box-shadow: 0 0 0 1px rgba(77,158,255,0.10), var(--shadow-xs);
+}
+
+.chain-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.3rem;
+}
+
+.chain-node--accent .chain-label { color: var(--color-primary); }
+
+.chain-sub {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* 노드 사이 연결선 + CSS 화살촉 */
+.chain-conn {
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 100%);
+  margin: 0 auto;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chain-conn::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgba(255,255,255,0.18);
+}
+
+.chain-conn--accent {
+  background: linear-gradient(180deg, rgba(77,158,255,0.35) 0%, rgba(77,158,255,0.10) 100%);
+}
+.chain-conn--accent::after { border-top-color: rgba(77,158,255,0.45); }
+
+@media (max-width: 900px) {
+  .how-inner   { grid-template-columns: 1fr; }
+  .how-diagram { max-width: 360px; margin: 2.5rem auto 0; }
+}
+
+/* ============================================
+   섹션 4: HENA 사용 흐름
+   ============================================ */
+.flow-section {
+  padding: var(--space-xl) 0;
+  background: var(--color-bg-deep);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  text-align: center;
+}
+
+.flow-eyebrow {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+.flow-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+  word-break: keep-all;
+}
+
+/* 4단 그리드: 공유 테두리로 패널들이 이어진 느낌 */
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-align: left;
+}
+
+.flow-step {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.flow-step:last-child { border-right: none; }
+
+/* 마지막 스텝: Electric Blue 좌측 강조선 + 포지셔닝 명시 */
+.flow-step--final {
+  background: linear-gradient(135deg, rgba(77,158,255,0.05) 0%, transparent 70%);
+  border-left: 2px solid rgba(77,158,255,0.20);
+  border-right: none;
+  margin-left: -1px;
+}
+
+/* 단계 번호: 크고 흐리게 — 장식 역할 */
+.flow-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 3.5vw, 3.8rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.03em;
+}
+
+.flow-step--final .flow-num { color: rgba(77,158,255,0.18); }
+
+.flow-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.55rem;
+}
+
+.flow-step--final .flow-title { color: var(--color-primary); }
+
+.flow-desc {
+  font-size: 0.86rem;
+  color: var(--color-text-soft);
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .flow-steps {
+    grid-template-columns: 1fr;
+    border-radius: var(--radius-sm);
+  }
+  .flow-step {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-step--final {
+    border-left: none;
+    border-top: 2px solid rgba(77,158,255,0.20);
+    margin-left: 0;
+  }
 }
 
 /* ============================================
@@ -896,7 +1267,11 @@ body::before {
 }
 
 .disease-card .card-icon {
-  font-size: 1.5rem;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: var(--color-text-soft);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1626,6 +2001,207 @@ canvas.sim-canvas {
   border-radius: 2px;
   flex-shrink: 0;
 }
+
+/* ============================================
+   섹션 6: 근거 / 데이터
+   ============================================ */
+.data-section {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* 카드(40%) + 텍스트(60%) — 섹션3과 반대 비율·위치 */
+.data-inner {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+/* ── 데이터 카드 3개 (플러시 스택) ── */
+.data-cards {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.data-card {
+  background: var(--color-surface);
+  padding: 1.8rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.data-card:last-child { border-bottom: none; }
+
+.data-card-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+/* 68.9% — 이 섹션의 Electric Blue 한 곳 */
+.data-card-num--accent { color: var(--color-primary); }
+
+.data-card-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.data-card-sub {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ── 오른쪽 텍스트 블록 ── */
+.data-eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+.data-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  word-break: keep-all;
+}
+
+.data-body p {
+  font-size: 0.98rem;
+  color: var(--color-text-soft);
+  line-height: 1.9;
+  margin-bottom: 1.1rem;
+}
+.data-body p:last-child { margin-bottom: 0; }
+
+/* 한계 인정 박스 — "솔직한 연구자" 톤 */
+.data-limit {
+  margin-top: 2rem;
+  padding: 1.2rem 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 2px solid rgba(255,255,255,0.18);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.data-limit-label {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.data-limit p {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .data-inner { grid-template-columns: 1fr; }
+  .data-cards { max-width: 420px; }
+}
+
+/* ============================================
+   섹션 8: 면책 + CTA
+   ============================================ */
+.cta-section {
+  padding: var(--space-xl) 0;
+  background: #070707;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 극소 센터 glow — 완전 블랙이 너무 답답하지 않도록 */
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 450px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.013) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.cta-eyebrow {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.cta-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: 1.8rem;
+  word-break: keep-all;
+}
+
+.cta-sub {
+  font-size: 1rem;
+  color: var(--color-text-soft);
+  line-height: 1.85;
+  max-width: 480px;
+  margin: 0 auto 3rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+/* 시안 A: Electric Blue */
+.cta-btn--blue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-primary);
+  color: #030d1a;
+  padding: 1rem 2.4rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+  letter-spacing: 0.01em;
+}
+.cta-btn--blue:hover {
+  background: #74b5ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(77,158,255,0.30);
+}
+
 
 /* ============================================
    면책 / 푸터

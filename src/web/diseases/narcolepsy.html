@@ -19,6 +19,19 @@
       margin-bottom: 0.45rem;
     }
 
+    /* 히어로 — 밤하늘 배경 + 다크 오버레이 + 하단 fade-out */
+    .detail-hero {
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(10, 10, 13, 0.86) 0%,
+          rgba(0,  0,  0,  0.52) 42%,
+          rgba(19, 19, 22, 0.82) 75%,
+          #131316                    100%
+        ),
+        url('../assets/images/narcolepsy-hero-bg.jpg') center / cover no-repeat;
+    }
+
     /* TOC ↔ 본문 간격 확장 (2rem → 4rem) */
     .detail-layout {
       gap: var(--space-lg);
@@ -27,6 +40,15 @@
     /* 본문 좌측 내부 여백 추가 — TOC와 호흡 공간 */
     .detail-layout > main {
       padding-left: var(--space-sm);
+    }
+
+    /* sticky TOC — 목차 세로 중심을 화면 정중앙에 정렬 */
+    .detail-sidebar {
+      position: sticky;
+      top: 50vh;
+      transform: translateY(-50%);
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
     }
   </style>
 </head>

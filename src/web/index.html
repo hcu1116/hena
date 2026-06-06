@@ -27,6 +27,71 @@
         ),
         url('assets/images/main-hero-bg.jpg') center / cover no-repeat;
     }
+
+    /* 마음 돌봄 배너 — 질환 카드와 구분되는 조용한 톤 */
+    .mc-entry-section {
+      padding: var(--space-xl) 0 0;
+    }
+    .mc-entry-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      padding: 2.5rem 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.025);
+    }
+    .mc-entry-eyebrow {
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted, rgba(255,255,255,0.38));
+      margin-bottom: 0.6rem;
+    }
+    .mc-entry-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--color-text);
+      margin-bottom: 0.65rem;
+    }
+    .mc-entry-body {
+      font-size: 0.88rem;
+      color: var(--color-text-soft);
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 0;
+    }
+    .mc-entry-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-soft);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      transition: all var(--transition);
+    }
+    .mc-entry-btn:hover {
+      border-color: rgba(255, 255, 255, 0.32);
+      color: var(--color-text);
+      transform: translateX(4px);
+    }
+    @media (max-width: 640px) {
+      .mc-entry-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -38,6 +103,7 @@
       <ul class="nav-links">
         <li><a href="#diseases">질환 정보</a></li>
         <li><a href="#about">소개</a></li>
+        <li><a href="mental-care.html">마음 돌봄</a></li>
         <li><a href="diseases/narcolepsy.html">기면증 →</a></li>
       </ul>
     </nav>
@@ -366,6 +432,20 @@
           <div class="card-en">Restless Legs Syndrome</div>
           <p>다리에 불편한 감각과 움직이고 싶은 충동이 생기는 질환. 수면 진입을 방해함.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 마음 돌봄 입구 ===== -->
+  <section class="mc-entry-section">
+    <div class="container">
+      <div class="mc-entry-banner reveal">
+        <div class="mc-entry-text">
+          <p class="mc-entry-eyebrow">Mental Care</p>
+          <h2 class="mc-entry-headline">기면증을 비롯한 희귀질환과<br>함께 살아가는 당신의 마음을 위한 공간</h2>
+          <p class="mc-entry-body">희귀질환과 함께하는 삶은 몸만큼이나 마음에도 무게가 쌓입니다. 그 무게는 유난함이 아니라, 이 병이 원래 동반하는 것입니다.</p>
+        </div>
+        <a href="mental-care.html" class="mc-entry-btn">마음 돌봄 →</a>
       </div>
     </div>
   </section>

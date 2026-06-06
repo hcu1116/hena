@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마음 돌봄 — HENA</title>
+  <meta name="description" content="기면증을 비롯한 희귀질환과 함께 살아가는 당신의 마음을 위한 공간">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* mental-care.html 전용 — style.css 미수정 */
+
+    /* ── 히어로 ── */
+    .mc-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: var(--space-xl) 0 var(--space-lg);
+      position: relative;
+      background:
+        radial-gradient(ellipse 140% 55% at 50% -5%, rgba(14, 18, 48, 0.9) 0%, transparent 65%),
+        var(--color-bg);
+    }
+
+    /* 극소 blue hint — 여기는 없애도 되지만 살아있어 보이도록 */
+    .mc-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 45% at 50% 35%, rgba(77, 158, 255, 0.025) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .mc-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 0 var(--space-md);
+    }
+
+    .mc-breadcrumb {
+      font-size: 0.85rem;
+      opacity: 0.45;
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mc-breadcrumb a {
+      color: var(--color-text);
+      text-decoration: none;
+      transition: opacity var(--transition);
+    }
+
+    .mc-breadcrumb a:hover { opacity: 0.65; }
+    .mc-breadcrumb span { opacity: 0.3; }
+
+    .mc-hero-sub {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      color: var(--color-primary);
+      opacity: 0.75;
+      margin-bottom: 1.6rem;
+      display: block;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .mc-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 7.5vw, 6.5rem);
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.08;
+      margin-bottom: 2.4rem;
+      letter-spacing: -0.025em;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+
+    .mc-hero-desc {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      line-height: 2;
+      max-width: 480px;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    /* ── 파트 1: 당신에게 ── */
+    .mc-section {
+      padding: var(--space-xl) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .mc-section-inner {
+      max-width: 700px;
+      padding: 0 var(--space-md);
+    }
+
+    .mc-eyebrow {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-lg);
+    }
+
+    .mc-item {
+      padding: 3.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mc-item:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .mc-item h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 1.3rem;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+
+    .mc-item p {
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 2;
+    }
+
+    /* ── 파트 2: 이 말을 건넵니다 ── */
+    .mc-quotes-section {
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      background: var(--color-bg-deep);
+    }
+
+    .mc-quotes-header {
+      max-width: 700px;
+      padding: var(--space-xl) var(--space-md) 0;
+    }
+
+    .mc-quotes-eyebrow {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .mc-quote-item {
+      padding: clamp(4rem, 8vw, 8rem) var(--space-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .mc-quote-item:last-child {
+      border-bottom: none;
+      padding-bottom: var(--space-xl);
+    }
+
+    /* 홀수: 왼쪽 정렬 / 짝수: 오른쪽 정렬 — 스크롤 리듬 */
+    .mc-quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.8vw, 2.3rem);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+      max-width: 740px;
+      word-break: keep-all;
+    }
+
+    .mc-quote-item:nth-child(odd) .mc-quote-text {
+      text-align: left;
+      margin-right: auto;
+    }
+
+    .mc-quote-item:nth-child(even) .mc-quote-text {
+      text-align: right;
+      margin-left: auto;
+    }
+
+    /* ── reveal: 마음 페이지는 더 느리고 잔잔하게 ── */
+    .mc-reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.95s ease, transform 0.95s ease;
+    }
+
+    .mc-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 짝수 항목 살짝 지연 — 물결처럼 */
+    .mc-quote-item:nth-child(even).mc-reveal {
+      transition-delay: 0.05s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 헤더 ===== -->
+  <header class="header" id="site-header">
+    <nav class="nav">
+      <a href="index.html" class="logo">HENA</a>
+      <ul class="nav-links">
+        <li><a href="index.html#diseases">질환 정보</a></li>
+        <li><a href="index.html#about">소개</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== 히어로 ===== -->
+  <section class="mc-hero">
+    <div class="container mc-hero-inner">
+      <div class="mc-breadcrumb">
+        <a href="index.html">HENA</a>
+        <span>/</span>
+        <span>마음 돌봄</span>
+      </div>
+      <span class="mc-hero-sub">YOU ARE NOT ALONE</span>
+      <h1 class="mc-hero-title">마음 돌봄</h1>
+      <p class="mc-hero-desc">기면증을 비롯한 희귀질환과 함께 살아가는<br>당신의 마음을 위한 공간입니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 파트 1: 당신에게 ===== -->
+  <section class="mc-section">
+    <div class="container mc-section-inner">
+      <span class="mc-eyebrow">당신에게</span>
+
+      <div class="mc-item mc-reveal">
+        <h3>먼저, 당신 잘못이 아닙니다</h3>
+        <p>일상을 제대로 해내지 못하는 순간들 — 그건 의지가 약해서도, 게을러서도 아닙니다. 기면증은 뇌가 '깨어있음'을 유지하는 신호(오렉신)를 잃은 병입니다. 당신이 통제할 수 있는 일이 아니었습니다.</p>
+      </div>
+
+      <div class="mc-item mc-reveal">
+        <h3>마음이 무거운 것도, 병의 일부입니다</h3>
+        <p>기면증과 함께 우울이나 불안을 겪는 사람은 매우 많습니다. 실제로 그 비율은 일반인의 약 3배로 보고됩니다. 당신이 유난히 약해서가 아니라, 기면증이라는 병이 원래 그런 무게를 동반하기 때문입니다.</p>
+      </div>
+
+      <div class="mc-item mc-reveal">
+        <h3>어쩌면, 마음이 먼저 힘들었을 수도 있습니다</h3>
+        <p>많은 환자가 기면증을 진단받기 전, 먼저 우울증으로 진단받습니다. 정신적인 어려움이 기면증보다 먼저 찾아오는 경우가 흔합니다. 순서가 어떻든, 그건 이상한 일이 아닙니다.</p>
+      </div>
+
+      <div class="mc-item mc-reveal">
+        <h3>무너진 건 당신이 아니라 상황이었습니다</h3>
+        <p>기면증은 사람을 천천히 고립시키곤 합니다. 관계가 멀어지고 혼자가 되어가는 건, 당신의 성격 탓이 아니라 병이 만든 결과입니다. 그리고 그 외로움을, 같은 병을 가진 많은 사람이 지나왔습니다.</p>
+      </div>
+
+      <div class="mc-item mc-reveal">
+        <h3>그리고, 혼자가 아닙니다</h3>
+        <p>누군가에게 털어놔도 시원하지 않았던 적이 있을 겁니다. 그래서 그냥 혼자 견디는 쪽을 택했을지도 모릅니다. 그건 당신이 이상해서가 아니라, 아직 맞는 방법이나 사람을 만나지 못했을 뿐입니다. 수면을 돌보는 일과 마음을 돌보는 일은 함께 가야 하고, 그 길에는 당신과 같은 사람들이 이미 걷고 있습니다. 천천히, 준비가 되었을 때여도 괜찮습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 파트 2: 가만히, 이 말을 건넵니다 ===== -->
+  <section class="mc-quotes-section">
+    <div class="container mc-quotes-header">
+      <span class="mc-quotes-eyebrow">가만히, 이 말을 건넵니다</span>
+    </div>
+
+    <div class="container">
+      <div class="mc-quote-item mc-reveal">
+        <p class="mc-quote-text">오늘 하루를 버텨낸 것만으로 충분합니다.</p>
+      </div>
+
+      <div class="mc-quote-item mc-reveal">
+        <p class="mc-quote-text">아무것도 하지 못한 날이 있어도 괜찮습니다. 그런 날도 지나갑니다.</p>
+      </div>
+
+      <div class="mc-quote-item mc-reveal">
+        <p class="mc-quote-text">잘 설명할 수 없는 마음이어도 괜찮습니다. 꼭 말이 되어야 하는 건 아니에요.</p>
+      </div>
+
+      <div class="mc-quote-item mc-reveal">
+        <p class="mc-quote-text">애써 괜찮은 척하지 않아도 됩니다. 적어도 여기서는요.</p>
+      </div>
+
+      <div class="mc-quote-item mc-reveal">
+        <p class="mc-quote-text">남들보다 느린 것 같아도, 당신은 당신의 속도로 가고 있습니다.</p>
+      </div>
+
+      <div class="mc-quote-item mc-reveal">
+        <p class="mc-quote-text">나아지지 않는 것 같은 날에도, 당신은 이미 충분히 버티고 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 푸터 ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h4>HENA</h4>
+          <p>희귀 수면·신경 질환과 웨어러블 헬스케어를 잇는 정보 포털.</p>
+        </div>
+        <div>
+          <h4 style="font-size:0.9rem; font-family:var(--font-body);">질환 정보</h4>
+          <ul class="footer-links">
+            <li><a href="diseases/narcolepsy.html">기면증</a></li>
+            <li><a href="#">수면무호흡증 (준비 중)</a></li>
+            <li><a href="#">하지불안증후군 (준비 중)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:0.82rem; opacity:0.6;">의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 HENA Project · Built by 황찬웅</span>
+        <a href="index.html">← 메인으로</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      const items = document.querySelectorAll('.mc-reveal');
+      if (!items.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '-5% 0px -5% 0px', threshold: 0.06 });
+
+      items.forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>

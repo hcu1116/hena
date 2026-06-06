@@ -42,14 +42,15 @@
       padding-left: var(--space-sm);
     }
 
-    /* sticky TOC — 목차 세로 중심을 화면 정중앙에 정렬 */
+    /* sticky TOC — 헤더(72px) 아래 고정, z-index는 헤더(100)보다 낮게 */
     .detail-sidebar {
       position: sticky;
-      top: 50vh;
-      transform: translateY(-50%);
-      max-height: calc(100vh - 4rem);
+      top: 90px;
+      max-height: calc(100vh - 110px);
       overflow-y: auto;
+      z-index: 10;
     }
+
   </style>
 </head>
 <body>

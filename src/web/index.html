@@ -6,6 +6,28 @@
   <title>HENA — 희귀 수면·신경 질환 정보 포털</title>
   <meta name="description" content="기면증을 비롯한 희귀 수면·신경 질환의 정보를 제공하고, 웨어러블 기술로 일상의 위험을 미리 감지하는 가능성을 탐구합니다.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* index.html 전용 — style.css 미수정 */
+
+    /* 메인 히어로 — 지구 배경 + 오버레이 + 하단 fade-out */
+    .hero-bg {
+      background:
+        linear-gradient(                      /* 좌→우: 왼쪽 어둡게(헤드라인), 오른쪽으로 열어줌 */
+          to right,
+          rgba(10, 10, 13, 0.94)  0%,
+          rgba( 5,  5,  8, 0.78) 38%,
+          rgba( 0,  0,  0, 0.48) 65%,
+          rgba( 0,  0,  0, 0.32) 100%
+        ),
+        linear-gradient(                      /* 상→하: 하단 경계를 배경색으로 완전 fade */
+          to bottom,
+          transparent              55%,
+          rgba(19, 19, 22, 0.72)  82%,
+          #131316                 100%
+        ),
+        url('assets/images/main-hero-bg.jpg') center / cover no-repeat;
+    }
+  </style>
 </head>
 <body>
 

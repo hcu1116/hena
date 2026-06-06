@@ -8,16 +8,12 @@
 심박수(HR), 심박변이도(HRV), 산소포화도(SpO2), 활동량 등의 바이오시그널을 분석하여
 졸음 위험도를 예측하고 이상 패턴을 감지합니다.
 
-## 상태
+## 기술 스택
 
-🚧 기획 및 준비 단계 (2026.05 ~)
-
-## 기술 스택 (예정)
-
-- **Backend:** Python, FastAPI
-- **AI:** PyTorch, scikit-learn, pandas, numpy
-- **Database:** PostgreSQL, Redis
-- **Infra:** Docker, AWS
+- Backend: Python, FastAPI
+- AI: PyTorch, scikit-learn, pandas, numpy
+- Database: PostgreSQL, Redis
+- Infra: Docker, AWS
 
 ## License
 

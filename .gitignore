@@ -48,6 +48,8 @@ learning/06_realdata/data/
 # ============================================
 04_journal/
 00_meta/project-identity.md
+CLAUDE.md
+.claude/
 
 # ============================================
 # 비밀 정보 (절대 올리면 안 되는 것)

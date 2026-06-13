@@ -321,22 +321,17 @@ body::before {
 /* 배경 ECG 파형 */
 .hero-ecg {
   position: absolute;
-  bottom: 0; left: 0;
-  width: 100%; height: 100px;
+  bottom: -50px; left: 0;
+  width: 100%; height: 180px;
   overflow: hidden;
   opacity: 1;
   pointer-events: none;
   z-index: 2;
 }
 
-.hero-ecg svg {
-  width: 200%; height: 100%;
-  animation: ecg-scroll 12s linear infinite;
-}
-
-@keyframes ecg-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.hero-ecg canvas {
+  width: 100%; height: 100%;
+  display: block;
 }
 
 .hero .container { position: relative; z-index: 3; width: 100%; }
@@ -555,7 +550,7 @@ body::before {
   overflow: hidden;
 }
 
-.hcard-ecg svg {
+.hcard-ecg canvas {
   width: 100%; height: 44px;
   display: block;
 }

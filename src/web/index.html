@@ -118,23 +118,9 @@
       <div class="hero-bg-orb hero-bg-orb--3"></div>
     </div>
 
-    <!-- 배경 ECG 파형 (분위기용) -->
+    <!-- 배경 ECG 파형 (분위기용 — main.js initBgECG) -->
     <div class="hero-ecg" aria-hidden="true">
-      <svg viewBox="0 0 1200 100" preserveAspectRatio="none" fill="none">
-        <polyline
-          points="
-            0,50 80,50 100,50 110,18 120,85 130,8 140,92 150,50
-            230,50 250,50 260,18 270,85 280,8 290,92 300,50
-            380,50 400,50 410,18 420,85 430,8 440,92 450,50
-            530,50 550,50 560,18 570,85 580,8 590,92 600,50
-            680,50 700,50 710,18 720,85 730,8 740,92 750,50
-            830,50 850,50 860,18 870,85 880,8 890,92 900,50
-            980,50 1000,50 1010,18 1020,85 1030,8 1040,92 1050,50
-            1130,50 1150,50 1160,18 1170,85 1180,8 1190,92 1200,50
-          "
-          stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-        />
-      </svg>
+      <canvas id="hero-ecg-canvas"></canvas>
     </div>
 
     <div class="container">
@@ -161,28 +147,9 @@
               <span class="hcard-title">HENA Monitor</span>
               <span class="hcard-live-badge">LIVE</span>
             </div>
-            <!-- 검은 배경 위의 ECG 라인: 3박동이 보이도록 -->
+            <!-- 실시간 ECG Canvas (main.js initHeroECG) -->
             <div class="hcard-ecg">
-              <svg viewBox="0 0 280 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <!-- 양 끝이 fade-out되는 그라데이션 -->
-                  <linearGradient id="ecg-g" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%"   stop-color="#4D9EFF" stop-opacity="0"/>
-                    <stop offset="15%"  stop-color="#4D9EFF" stop-opacity="1"/>
-                    <stop offset="85%"  stop-color="#4D9EFF" stop-opacity="1"/>
-                    <stop offset="100%" stop-color="#4D9EFF" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <polyline
-                  points="
-                    0,22  12,22  17,17  20,22  24,22  28,25  32,1  36,37  40,22  47,14  57,22  93,22
-                    105,22 110,17 113,22 117,22 121,25 125,1 129,37 133,22 140,14 150,22 186,22
-                    198,22 203,17 206,22 210,22 214,25 218,1 222,37 226,22 233,14 243,22 280,22
-                  "
-                  stroke="url(#ecg-g)" stroke-width="1.8"
-                  stroke-linecap="round" stroke-linejoin="round"
-                />
-              </svg>
+              <canvas id="hcard-ecg-canvas" aria-hidden="true"></canvas>
             </div>
             <div class="hcard-metric-row">
               <div class="hcard-bpm">

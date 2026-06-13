@@ -22,7 +22,7 @@ const GRAPH_COLOR_NARCO  = '#f0784b';
 const normalConfig = {
   baseBPM: 68,          // 기준 심박수
   bpmVariance: 3,       // BPM 변동 범위 (작을수록 규칙적)
-  noiseAmp: 1.5,        // 파형 노이즈 크기
+  noiseAmp: 0.8,        // 파형 노이즈 크기
   spikeInterval: 55,    // 심장 박동 간격 (픽셀 단위)
   spikeHeight: 28,      // QRS 스파이크 높이
   color: GRAPH_COLOR_NORMAL,
@@ -35,7 +35,7 @@ const normalConfig = {
 const narcoConfig = {
   baseBPM: 82,
   bpmVariance: 12,      // BPM 변동이 큼 (교감신경 과활성)
-  noiseAmp: 4,          // 노이즈도 큼
+  noiseAmp: 2,          // 노이즈도 큼
   spikeInterval: 45,    // 박동 간격 더 짧음 (HR 높음)
   spikeHeight: 32,
   color: GRAPH_COLOR_NARCO,
@@ -96,7 +96,7 @@ function generateWavePoints(config, offset, phase) {
 
     // 기면증의 경우 불규칙 노이즈 추가
     const irregularity = config.bpmVariance > 5
-      ? Math.sin(realX * 0.03 + phase * 2.3) * 3
+      ? Math.sin(realX * 0.03 + phase * 2.3) * 1.5
       : 0;
 
     points.push({
@@ -251,7 +251,7 @@ function animate(timestamp) {
   // 느리게 해야 패턴 차이가 눈에 들어옴
   normalOffset += 0.4;
   narcoOffset += 0.5;   // 기면증은 약간 빠름 (HR 높음 → spikeInterval 짧음)
-  timePhase += 0.004;
+  timePhase += 0.001;
 
   drawWave(normalConfig, normalOffset, timePhase, false);
   drawWave(narcoConfig,  narcoOffset,  timePhase * 1.3, inEDS);

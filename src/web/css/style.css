@@ -1178,6 +1178,8 @@ body::before {
   margin-bottom: var(--space-xs);
   color: var(--color-text);
   letter-spacing: -0.02em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .section-subtitle {
@@ -1189,6 +1191,7 @@ body::before {
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
+  word-break: keep-all;
 }
 
 /* ============================================
@@ -1584,6 +1587,8 @@ body::before {
   align-items: center;
   gap: 0.6rem;
   color: var(--color-text);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .content-block h2 .icon {
@@ -1630,36 +1635,50 @@ body::before {
   font-size: 1rem;
 }
 
+/* 표 래퍼: 모바일에서 가로 스크롤 허용 */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+  border-radius: var(--radius-sm);
+}
+
 .signal-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
-  background: var(--color-surface);
+  min-width: 420px;
+  background: #222228;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.45),
+    0 1px 0 rgba(255,255,255,0.06) inset;
 }
+
+.table-wrap .signal-table { margin: 0; }
 
 .signal-table th,
 .signal-table td {
-  padding: 0.9rem 1.2rem;
+  padding: 0.95rem 1.3rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   font-size: 0.93rem;
 }
 
 .signal-table th {
-  background: rgba(255,255,255,0.04);
-  color: var(--color-text-soft);
+  background: rgba(77,158,255,0.10);
+  color: var(--color-text);
   font-weight: 600;
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(77,158,255,0.18);
 }
 
-.signal-table td { color: var(--color-text-soft); }
+.signal-table td { color: var(--color-text); }
 .signal-table tr:last-child td { border-bottom: none; }
-.signal-table tr:hover td { background: rgba(255,255,255,0.02); }
+.signal-table tr:hover td { background: rgba(255,255,255,0.04); }
 
 .signal-table .yes { color: #22C55E; font-weight: 500; font-size: 0.9rem; }
 .signal-table .no  { color: var(--color-text-muted); font-weight: 500; font-size: 0.9rem; }
@@ -2350,4 +2369,6 @@ canvas.sim-canvas {
 @media (max-width: 480px) {
   .stats-grid   { grid-template-columns: 1fr 1fr; }
   .hero-actions { flex-direction: column; align-items: center; }
+  .container    { padding: 0 1.25rem; }
+  .content-block h2 { font-size: 1.4rem; }
 }

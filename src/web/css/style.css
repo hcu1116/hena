@@ -222,6 +222,167 @@ body::before {
 .nav-links a:hover            { color: var(--color-text); }
 .nav-links a:hover::after     { width: 100%; }
 
+/* ── 드롭다운 네비게이션 ── */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-text-soft);
+  transition: color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  position: relative;
+}
+
+.nav-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-text);
+  transition: width var(--transition);
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: var(--color-text);
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger::after,
+.nav-dropdown.open .nav-dropdown-trigger::after {
+  width: 100%;
+}
+
+.nav-dropdown-chevron {
+  width: 11px; height: 11px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav-dropdown:hover .nav-dropdown-chevron,
+.nav-dropdown.open  .nav-dropdown-chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* 드롭다운 패널 */
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 270px;
+  background: #1e1e22;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.65), 0 1px 0 rgba(255,255,255,0.06) inset;
+  padding: 0.45rem;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 200;
+}
+
+/* 트리거↔패널 사이 마우스 끊김 방지 브릿지 */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -14px; left: 0;
+  width: 100%; height: 14px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open  .nav-dropdown-menu {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* 드롭다운 각 항목 */
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background var(--transition);
+}
+
+a.nav-dropdown-item::after { display: none; }
+
+a.nav-dropdown-item:hover {
+  background: rgba(77,158,255,0.10);
+}
+
+a.nav-dropdown-item:hover .item-ko {
+  color: var(--color-text);
+}
+
+.nav-dropdown-item--disabled {
+  cursor: default;
+  opacity: 0.38;
+}
+
+.item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  flex: 1;
+}
+
+.item-ko {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.item-en {
+  color: var(--color-text-muted);
+  font-size: 0.73rem;
+  font-family: var(--font-label);
+  letter-spacing: 0.02em;
+}
+
+.item-badge {
+  flex-shrink: 0;
+  font-size: 0.62rem;
+  font-family: var(--font-label);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  padding: 0.15rem 0.42rem;
+  white-space: nowrap;
+}
+
+/* 모바일: 드롭다운 오른쪽 정렬 (화면 밖 방지) */
+@media (max-width: 600px) {
+  .nav-dropdown-menu {
+    left: auto;
+    right: -0.5rem;
+    transform: translateY(-6px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown.open  .nav-dropdown-menu {
+    transform: translateY(0);
+  }
+}
+
 /* ============================================
    히어로 섹션
    ============================================ */

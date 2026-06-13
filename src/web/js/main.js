@@ -365,7 +365,44 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach((s) => tocObserver.observe(s));
   }
 
-  // --- 5. ECG 파형 초기화 ---
+  // --- 5. 질환 정보 드롭다운 ---
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      dropdowns.forEach((d) => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  document.addEventListener('click', () => {
+    dropdowns.forEach((d) => {
+      d.classList.remove('open');
+      const t = d.querySelector('.nav-dropdown-trigger');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdowns.forEach((d) => {
+        d.classList.remove('open');
+        const t = d.querySelector('.nav-dropdown-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // --- 6. ECG 파형 초기화 ---
   initHeroECG();  // HENA Monitor 카드 파형
   initBgECG();    // 히어로 배경 선
 

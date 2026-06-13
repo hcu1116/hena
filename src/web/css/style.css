@@ -1097,8 +1097,9 @@ body::before {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.stat-item.featured .stat-unit  { font-size: 1.6rem; padding-bottom: 0.55em; opacity: 0.6; }
-.stat-item.featured .stat-label { font-size: 0.95rem; opacity: 1; max-width: 200px; }
+.stat-item.featured .stat-unit   { font-size: 1.6rem; padding-bottom: 0.55em; opacity: 0.6; }
+.stat-item.featured .stat-prefix { font-size: 1.6rem; padding-bottom: 0.55em; opacity: 0.6; }
+.stat-item.featured .stat-label  { font-size: 0.95rem; opacity: 1; }
 .stat-item.featured .stat-sub   { opacity: 0.35; }
 
 .stat-number {
@@ -1117,7 +1118,8 @@ body::before {
   line-height: 1;
 }
 
-.stat-unit {
+.stat-unit,
+.stat-prefix {
   font-size: 0.95rem;
   opacity: 0.45;
   color: white;

@@ -38,18 +38,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function animateCount(el, target, duration = 1800) {
+    const divisor = parseFloat(el.dataset.divisor) || 1;
     const start = performance.now();
 
     function tick(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      const value = Math.round(easeOutQuart(progress) * target);
+      const raw = easeOutQuart(progress) * target;
 
-      // 1000 이상이면 쉼표 포맷 (예: 20,000)
-      el.textContent = value >= 1000
-        ? value.toLocaleString('ko-KR')
-        : String(value);
+      let display;
+      if (divisor !== 1) {
+        // 소수점이 있는 값 (예: 18 / 10 → "1.8")
+        display = (raw / divisor).toFixed(1);
+      } else {
+        const value = Math.round(raw);
+        display = value >= 1000 ? value.toLocaleString('ko-KR') : String(value);
+      }
 
+      el.textContent = display;
       if (progress < 1) requestAnimationFrame(tick);
     }
 

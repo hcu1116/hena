@@ -185,13 +185,147 @@
           <!-- 3. 주요 증상 -->
           <div class="content-block reveal" id="symptoms">
             <h2>3. 주요 증상</h2>
-            <p>기면증 증상은 "꿈 수면(REM)이 깨어있을 때 침범한다"로 이해하면 쉽습니다.</p>
-            <ul>
-              <li><strong>과도한 주간졸림 (EDS, Excessive Daytime Sleepiness):</strong> 낮에 견딜 수 없이 졸림. 모든 환자의 공통 증상.</li>
-              <li><strong>탈력발작 (Cataplexy):</strong> 웃음·놀람 등 강한 감정 자극에 갑자기 근육 힘이 빠짐. 심하면 전신이 무너져 쓰러짐. 의식은 있는 상태에서 몸만 무너짐.</li>
-              <li><strong>수면마비 (Sleep Paralysis):</strong> 잠들거나 깰 때 몸이 안 움직이는 상태 (흔히 "가위눌림").</li>
-              <li><strong>입면 환각 (Hypnagogic Hallucinations):</strong> 잠들 무렵의 생생한 시각·청각 환각.</li>
-            </ul>
+            <p>기면증 증상은 <strong>꿈 수면(REM)이 깨어있을 때 침범</strong>하는 것으로 이해하면 쉽습니다. 카드를 눌러 자세히 알아보세요.</p>
+
+            <div class="symptom-card-grid">
+
+              <!-- 과도한 주간졸림 -->
+              <div class="symptom-card" role="button" tabindex="0" aria-expanded="false">
+                <div class="symptom-card-front">
+                  <div class="symptom-card-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <!-- 눈 테두리 -->
+                      <path d="M6 25 C13 16 35 16 42 25 C35 33 13 33 6 25 Z" stroke-width="1.5"/>
+                      <!-- 무거운 윗 눈꺼풀 -->
+                      <path d="M6 25 C15 21 33 21 42 25" stroke-width="3" opacity="0.45"/>
+                      <!-- 동공 -->
+                      <circle cx="24" cy="27" r="5" fill="currentColor" stroke="none" opacity="0.32"/>
+                      <!-- Z z -->
+                      <path d="M33 13 L37 13 L33 9 L37 9" stroke-width="1.6" opacity="0.75"/>
+                      <path d="M36 8 L39 8 L36 5.5 L39 5.5" stroke-width="1.3" opacity="0.5"/>
+                    </svg>
+                  </div>
+                  <div class="symptom-card-meta">
+                    <div class="symptom-card-name">과도한 주간졸림</div>
+                    <div class="symptom-card-en">EDS · Excessive Daytime Sleepiness</div>
+                    <div class="symptom-card-summary">충분히 잤는데도 낮에 갑자기 참을 수 없는 졸음이 쏟아집니다.</div>
+                  </div>
+                  <svg class="symptom-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="symptom-card-detail">
+                  <div class="symptom-card-detail-inner">
+                    <p>낮 어느 순간이든 강렬한 졸음이 갑자기 쏟아집니다. 밤에 충분히 자도 사라지지 않으며, 식사 중·대화 중에도 눈이 감깁니다. 기면증 환자 <strong>모두</strong>에게 나타나는 핵심 증상으로, 탈력발작이 없는 NT2 환자도 반드시 EDS를 경험합니다.</p>
+                    <div class="symptom-empathy">
+                      <span class="empathy-label">이런 경험 있나요?</span>
+                      "밤에 7~8시간 충분히 잤는데도 낮에 갑자기 참을 수 없는 졸음이 쏟아져서, 하던 일을 멈춰야 했던 적이 있나요?"
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 탈력발작 -->
+              <div class="symptom-card" role="button" tabindex="0" aria-expanded="false">
+                <div class="symptom-card-front">
+                  <div class="symptom-card-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <!-- 번개 -->
+                      <path d="M27 5 L13 27 L22 27 L18 43 L35 21 L25 21 Z" stroke-width="1.5" fill="currentColor" fill-opacity="0.14"/>
+                    </svg>
+                  </div>
+                  <div class="symptom-card-meta">
+                    <div class="symptom-card-name">탈력발작</div>
+                    <div class="symptom-card-en">Cataplexy</div>
+                    <div class="symptom-card-summary">웃음·놀람 같은 강한 감정에 갑자기 근육 힘이 빠집니다.</div>
+                  </div>
+                  <svg class="symptom-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="symptom-card-detail">
+                  <div class="symptom-card-detail-inner">
+                    <p>웃음·놀람·흥분 같은 강한 감정 자극에 갑자기 근육 힘이 빠집니다. 가벼울 때는 턱이 처지거나 무릎이 꺾이는 정도지만, 심하면 전신이 무너져 쓰러집니다. <strong>의식은 또렷한 상태</strong>에서 몸만 무너지기 때문에, 쓰러지는 자신을 의식하면서도 막지 못합니다. NT1(1형 기면증)의 진단 기준입니다.</p>
+                    <div class="symptom-empathy">
+                      <span class="empathy-label">이런 경험 있나요?</span>
+                      "크게 웃거나 화가 났을 때, 갑자기 무릎이 꺾이거나 온몸에 힘이 빠지는 느낌을 받은 적 있나요?"
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 수면마비 -->
+              <div class="symptom-card" role="button" tabindex="0" aria-expanded="false">
+                <div class="symptom-card-front">
+                  <div class="symptom-card-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <!-- 자물쇠 몸통 -->
+                      <rect x="11" y="23" width="26" height="20" rx="5" stroke-width="1.5"/>
+                      <!-- 걸쇠 -->
+                      <path d="M16 23 V17 A8 8 0 0 1 32 17 V23" stroke-width="1.5"/>
+                      <!-- 열쇠구멍 원 -->
+                      <circle cx="24" cy="33" r="3.5" stroke-width="1.5"/>
+                      <!-- 열쇠구멍 슬롯 -->
+                      <path d="M24 36.5 L24 40" stroke-width="1.5"/>
+                    </svg>
+                  </div>
+                  <div class="symptom-card-meta">
+                    <div class="symptom-card-name">수면마비</div>
+                    <div class="symptom-card-en">Sleep Paralysis</div>
+                    <div class="symptom-card-summary">잠들거나 깰 때 눈은 떠지는데 몸이 전혀 움직이지 않습니다.</div>
+                  </div>
+                  <svg class="symptom-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="symptom-card-detail">
+                  <div class="symptom-card-detail-inner">
+                    <p>잠들거나 깨어나는 순간, 의식은 또렷하지만 몸이 전혀 움직이지 않는 상태입니다. 흔히 "가위눌림"이라고 불립니다. REM 수면의 근육 억제가 깨어있는 상태에서 지속되어 나타납니다. 수 초에서 수 분 지속되며, 심한 공포감을 동반하는 경우가 많습니다.</p>
+                    <div class="symptom-empathy">
+                      <span class="empathy-label">이런 경험 있나요?</span>
+                      "잠에서 깼는데 눈은 떠졌지만 몸이 전혀 움직이지 않아, 소리조차 지를 수 없는 공포를 느낀 적 있나요?"
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 입면 환각 -->
+              <div class="symptom-card" role="button" tabindex="0" aria-expanded="false">
+                <div class="symptom-card-front">
+                  <div class="symptom-card-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <!-- 눈 -->
+                      <path d="M7 24 C14 15 34 15 41 24 C34 33 14 33 7 24 Z" stroke-width="1.5"/>
+                      <circle cx="24" cy="24" r="5" stroke-width="1.5"/>
+                      <!-- 빛줄기 (환각/왜곡된 시지각) -->
+                      <path d="M24 5 L24 9.5" stroke-width="1.5" opacity="0.6"/>
+                      <path d="M37 9.5 L34 12.5" stroke-width="1.5" opacity="0.6"/>
+                      <path d="M43 22 L38.5 22" stroke-width="1.5" opacity="0.6"/>
+                      <path d="M11 9.5 L14 12.5" stroke-width="1.5" opacity="0.6"/>
+                      <path d="M5 22 L9.5 22" stroke-width="1.5" opacity="0.6"/>
+                    </svg>
+                  </div>
+                  <div class="symptom-card-meta">
+                    <div class="symptom-card-name">입면 환각</div>
+                    <div class="symptom-card-en">Hypnagogic Hallucinations</div>
+                    <div class="symptom-card-summary">잠들기 직전, 현실처럼 생생한 시각·청각 환각이 나타납니다.</div>
+                  </div>
+                  <svg class="symptom-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" stroke-width="1.8"/>
+                  </svg>
+                </div>
+                <div class="symptom-card-detail">
+                  <div class="symptom-card-detail-inner">
+                    <p>잠들기 직전(입면기) 또는 깰 때, 현실과 구분하기 어려운 생생한 시각·청각·촉각 환각이 나타납니다. 사람 소리가 들리거나, 방에 누군가 있는 것처럼 보이기도 합니다. 뇌가 REM 수면의 꿈 상태로 너무 일찍 진입해서 발생하며, 수면마비와 동시에 나타나는 경우가 많습니다.</p>
+                    <div class="symptom-empathy">
+                      <span class="empathy-label">이런 경험 있나요?</span>
+                      "잠들기 직전 누군가의 목소리가 들리거나, 방 안에 실제로 없는 무언가가 보여서 소스라치게 놀란 적 있나요?"
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <!-- 4. 일상 속 위험 -->

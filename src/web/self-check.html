@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>졸음 자가 체크 — HENA</title>
+  <meta name="description" content="기면증과 수면 장애를 선별하기 위한 국제 표준 기반(ESS·SNS) 자가 선별 도구">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* self-check.html 전용 — style.css 미수정 */
+
+    /* ── 히어로 ── */
+    .sc-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      padding: var(--space-xl) 0 var(--space-lg);
+      position: relative;
+      background:
+        radial-gradient(ellipse 130% 50% at 50% -5%, rgba(10, 20, 55, 0.85) 0%, transparent 65%),
+        var(--color-bg);
+    }
+
+    .sc-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 35%, rgba(77, 158, 255, 0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .sc-hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 0 var(--space-md);
+    }
+
+    .sc-breadcrumb {
+      font-size: 0.85rem;
+      opacity: 0.45;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sc-breadcrumb a {
+      color: var(--color-text);
+      text-decoration: none;
+      transition: opacity var(--transition);
+    }
+
+    .sc-breadcrumb a:hover { opacity: 0.65; }
+    .sc-breadcrumb span   { opacity: 0.3; }
+
+    .sc-hero-sub {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      color: var(--color-primary);
+      opacity: 0.8;
+      margin-bottom: 1.4rem;
+      display: block;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .sc-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6.5vw, 5.5rem);
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.1;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.025em;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+
+    .sc-hero-desc {
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.9;
+      max-width: 460px;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    /* ── 본문 ── */
+    .sc-section {
+      padding: var(--space-lg) 0 var(--space-xl);
+    }
+
+    .sc-inner {
+      max-width: 780px;
+      padding: 0 var(--space-md);
+    }
+
+    .sc-intro {
+      margin-bottom: 2.5rem;
+    }
+
+    .sc-intro p {
+      font-size: 0.92rem;
+      color: var(--color-text-soft);
+      line-height: 1.85;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── 파트 헤더 ── */
+    .sc-part-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin: 2.5rem 0 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sc-part-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.75rem;
+      background: rgba(77, 158, 255, 0.12);
+      border: 1px solid rgba(77, 158, 255, 0.25);
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .sc-part-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.35;
+    }
+
+    .sc-part-sub {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .sc-part-desc {
+      font-size: 0.86rem;
+      color: var(--color-text-soft);
+      line-height: 1.8;
+      margin: 0 0 1.25rem;
+    }
+
+    /* ── Submit 영역 ── */
+    .sc-form-footer {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── 결과 박스 ── */
+    .sc-result-box {
+      display: none;
+      margin-top: 2rem;
+    }
+
+    .sc-result-box.is-visible {
+      display: block;
+      animation: essSlideIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .sc-result-section {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      background: var(--color-surface);
+      margin-bottom: 1rem;
+    }
+
+    .sc-result-label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    /* Part 1 점수 */
+    .sc-score-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .sc-ess-num {
+      font-size: 3.2rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      line-height: 1;
+      transition: color var(--transition);
+    }
+
+    .sc-ess-denom {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+    }
+
+    .sc-ess-msg {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* 점수대 색상 */
+    .sc-score--normal .sc-ess-num,
+    .sc-score--normal .sc-ess-msg { color: #4ade80; }
+    .sc-score--normal { border-color: rgba(34, 197, 94, 0.28) !important; }
+
+    .sc-score--mild .sc-ess-num,
+    .sc-score--mild .sc-ess-msg { color: #fbbf24; }
+    .sc-score--mild { border-color: rgba(245, 158, 11, 0.3) !important; }
+
+    .sc-score--severe .sc-ess-num,
+    .sc-score--severe .sc-ess-msg { color: #f87171; }
+    .sc-score--severe { border-color: rgba(239, 68, 68, 0.3) !important; }
+
+    /* Part 2 플래그 */
+    .sc-flag {
+      border-radius: var(--radius-xs);
+      padding: 0.85rem 1.1rem;
+      font-size: 0.84rem;
+      line-height: 1.75;
+      margin-bottom: 0.65rem;
+    }
+
+    .sc-flag:last-child { margin-bottom: 0; }
+
+    .sc-flag--warn {
+      background: rgba(239, 68, 68, 0.08);
+      border-left: 3px solid #EF4444;
+      color: var(--color-text-soft);
+    }
+
+    .sc-flag--warn strong { color: #f87171; }
+
+    .sc-flag--info {
+      background: rgba(77, 158, 255, 0.07);
+      border-left: 3px solid rgba(77, 158, 255, 0.4);
+      color: var(--color-text-soft);
+    }
+
+    .sc-flag--info strong { color: var(--color-primary); }
+
+    .sc-flag--ok {
+      background: rgba(34, 197, 94, 0.07);
+      border-left: 3px solid rgba(34, 197, 94, 0.35);
+      color: var(--color-text-soft);
+    }
+
+    /* 종합 권고 */
+    .sc-rec-section { text-align: center; }
+
+    .sc-rec {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0.5rem 0;
+    }
+
+    .sc-rec--urgent    { color: #f87171; }
+    .sc-rec--recommend { color: #fbbf24; }
+    .sc-rec--normal    { color: #4ade80; }
+
+    /* 면책 */
+    .sc-disclaimer {
+      font-size: 0.77rem;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 2px solid var(--color-border);
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .sc-disclaimer-source {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.7rem;
+      opacity: 0.65;
+    }
+
+    /* ── 범례 ── */
+    .sc-legend {
+      background: rgba(77, 158, 255, 0.05);
+      border: 1px solid rgba(77, 158, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .sc-legend-title {
+      display: block;
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 0.6rem;
+      opacity: 0.85;
+    }
+
+    .sc-legend-items {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .sc-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--color-text-soft);
+    }
+
+    .sc-legend-item b {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-xs);
+      background: rgba(77, 158, 255, 0.1);
+      border: 1px solid rgba(77, 158, 255, 0.22);
+      color: var(--color-text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 480px) {
+      .sc-legend-items { gap: 1rem; }
+      .sc-legend-item  { font-size: 0.82rem; }
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 700px) {
+      .sc-result-section { padding: 1.4rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 헤더 ===== -->
+  <header class="header" id="site-header">
+    <nav class="nav">
+      <a href="index.html" class="logo">HENA</a>
+      <ul class="nav-links">
+        <li><a href="index.html#diseases">질환 정보</a></li>
+        <li><a href="index.html#about">소개</a></li>
+        <li><a href="mental-care.html">마음 돌봄</a></li>
+        <li><a href="self-check.html">자가 체크</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== 히어로 ===== -->
+  <section class="sc-hero">
+    <div class="container sc-hero-inner">
+      <div class="sc-breadcrumb">
+        <a href="index.html">HENA</a>
+        <span>/</span>
+        <span>자가 체크</span>
+      </div>
+      <span class="sc-hero-sub">SELF SCREENING</span>
+      <h1 class="sc-hero-title">졸음 자가 체크</h1>
+      <p class="sc-hero-desc">기면증과 수면 장애를 선별하기 위한<br>국제 표준 기반의 자가 선별 도구입니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 체크 본문 ===== -->
+  <section class="sc-section">
+    <div class="container sc-inner">
+
+      <div class="sc-intro">
+        <p>아래 두 파트에 걸쳐 총 <strong>13개 문항</strong>에 답해주세요. 최근 일상을 기준으로 솔직하게 선택할수록 결과가 정확합니다.</p>
+        <p>이 도구는 선별(Screening) 목적이며 진단 도구가 아닙니다. 결과와 무관하게 증상이 지속된다면 반드시 수면 전문의를 찾아가세요.</p>
+      </div>
+
+      <form class="ess-form" id="sc-form" novalidate>
+
+        <!-- 파트 1 -->
+        <div class="sc-part-header">
+          <span class="sc-part-num">파트 1</span>
+          <div>
+            <div class="sc-part-title">졸음 정도</div>
+            <span class="sc-part-sub">Epworth Sleepiness Scale (ESS) 기반 · 8문항</span>
+          </div>
+        </div>
+        <p class="sc-part-desc">최근 일상에서 아래 상황일 때 졸거나 잠들 가능성은 어느 정도인가요?</p>
+
+        <div class="sc-legend">
+          <span class="sc-legend-title">점수 기준 — 파트 1 · 2 공통</span>
+          <div class="sc-legend-items">
+            <span class="sc-legend-item"><b>0</b>전혀 없음</span>
+            <span class="sc-legend-item"><b>1</b>가끔 있음</span>
+            <span class="sc-legend-item"><b>2</b>종종 있음</span>
+            <span class="sc-legend-item"><b>3</b>자주 있음</span>
+          </div>
+        </div>
+
+        <div class="ess-questions">
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">1</span>앉아서 책을 읽을 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q1" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q1" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q1" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q1" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">2</span>TV를 볼 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q2" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q2" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q2" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q2" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">3</span>공공장소에서 가만히 앉아 있을 때 (회의, 극장 등)</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q3" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q3" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q3" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q3" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">4</span>차나 대중교통에서 1시간 정도 앉아 있을 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q4" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q4" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q4" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q4" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">5</span>오후에 누워서 쉴 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q5" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q5" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q5" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q5" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">6</span>앉아서 누군가와 대화할 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q6" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q6" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q6" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q6" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">7</span>점심 식사 후 조용히 앉아 있을 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q7" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q7" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q7" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q7" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">8</span>차에서 신호 대기로 잠깐 멈춰 있을 때</div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q8" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q8" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q8" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q8" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 파트 2 -->
+        <div class="sc-part-header">
+          <span class="sc-part-num">파트 2</span>
+          <div>
+            <div class="sc-part-title">기면증 특이 증상</div>
+            <span class="sc-part-sub">Swiss Narcolepsy Scale (SNS) 기반 · 5문항</span>
+          </div>
+        </div>
+        <p class="sc-part-desc">아래 증상을 얼마나 자주 경험하는지 선택해주세요.</p>
+
+        <div class="ess-questions">
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">9</span>웃거나 기쁘거나 화날 때 갑자기 무릎에 힘이 빠지거나 꺾인 적이 있다 <em style="font-style:normal;font-size:0.75em;color:var(--color-text-muted);">(탈력발작)</em></div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q9" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q9" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q9" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q9" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">10</span>강한 감정을 느낄 때 턱이 처지거나 얼굴·목 근육에 힘이 빠진 적이 있다 <em style="font-style:normal;font-size:0.75em;color:var(--color-text-muted);">(탈력발작)</em></div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q10" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q10" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q10" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q10" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">11</span>잠들 때나 깰 때 몸을 전혀 움직일 수 없었던 적이 있다 <em style="font-style:normal;font-size:0.75em;color:var(--color-text-muted);">(수면마비)</em></div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q11" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q11" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q11" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q11" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">12</span>잠들 때 생생한 환각(소리나 영상)을 경험한 적이 있다 <em style="font-style:normal;font-size:0.75em;color:var(--color-text-muted);">(입면환각)</em></div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q12" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q12" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q12" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q12" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+          <div class="ess-q">
+            <div class="ess-q-label"><span class="ess-q-num">13</span>충분히 자도 아침에 개운하지 않은 적이 잦다 <em style="font-style:normal;font-size:0.75em;color:var(--color-text-muted);">(야간 수면 장애)</em></div>
+            <div class="ess-opts">
+              <label class="ess-opt"><input type="radio" name="q13" value="0"><span>0</span></label>
+              <label class="ess-opt"><input type="radio" name="q13" value="1"><span>1</span></label>
+              <label class="ess-opt"><input type="radio" name="q13" value="2"><span>2</span></label>
+              <label class="ess-opt"><input type="radio" name="q13" value="3"><span>3</span></label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Submit -->
+        <div class="sc-form-footer">
+          <button type="button" class="ess-btn" id="sc-submit" disabled>결과 보기</button>
+          <p class="ess-hint" id="sc-hint">13개 문항을 모두 선택하면 결과를 볼 수 있어요.</p>
+        </div>
+
+      </form>
+
+      <!-- 결과 박스 -->
+      <div class="sc-result-box" id="sc-result" aria-live="polite">
+
+        <!-- Part 1 결과 -->
+        <div class="sc-result-section" id="sc-part1-result">
+          <span class="sc-result-label">파트 1 · 졸음 수준 (ESS)</span>
+          <div class="sc-score-wrap">
+            <span class="sc-ess-num" id="sc-ess-score">0</span>
+            <span class="sc-ess-denom">/ 24</span>
+          </div>
+          <p class="sc-ess-msg" id="sc-ess-msg"></p>
+        </div>
+
+        <!-- Part 2 결과 -->
+        <div class="sc-result-section">
+          <span class="sc-result-label">파트 2 · 기면증 특이 증상</span>
+          <div id="sc-flags"></div>
+        </div>
+
+        <!-- 종합 권고 -->
+        <div class="sc-result-section sc-rec-section">
+          <span class="sc-result-label">종합 의견</span>
+          <p class="sc-rec" id="sc-rec"></p>
+        </div>
+
+        <!-- 면책 -->
+        <div class="sc-disclaimer">
+          이 자가 체크는 의학적 진단이 아니며, 참고용 선별 도구입니다. 정확한 진단은 반드시 수면 전문의에게 받으세요.
+          <span class="sc-disclaimer-source">출처: Epworth Sleepiness Scale (Johns MW, 1991) · Swiss Narcolepsy Scale (Sturzenegger et al.)</span>
+        </div>
+
+        <button type="button" class="ess-retry" id="sc-reset">↺ 다시 하기</button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 푸터 ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h4>HENA</h4>
+          <p>희귀 수면·신경 질환과 웨어러블 헬스케어를 잇는 정보 포털.</p>
+        </div>
+        <div>
+          <h4 style="font-size:0.9rem; font-family:var(--font-body);">질환 정보</h4>
+          <ul class="footer-links">
+            <li><a href="diseases/narcolepsy.html">기면증</a></li>
+            <li><a href="#">수면무호흡증 (준비 중)</a></li>
+            <li><a href="#">하지불안증후군 (준비 중)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:0.82rem; opacity:0.6;">의학적 진단이나 치료를 대신하지 않습니다. 증상이 있다면 반드시 전문의와 상담하세요.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 HENA Project · Built by 황찬웅</span>
+        <a href="index.html">← 메인으로</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      const form      = document.getElementById('sc-form');
+      if (!form) return;
+
+      const submitBtn  = document.getElementById('sc-submit');
+      const hintEl     = document.getElementById('sc-hint');
+      const resultBox  = document.getElementById('sc-result');
+      const resetBtn   = document.getElementById('sc-reset');
+      const TOTAL      = 13;
+
+      function countAnswered() {
+        let n = 0;
+        for (let i = 1; i <= TOTAL; i++) {
+          if (form.querySelector(`input[name="q${i}"]:checked`)) n++;
+        }
+        return n;
+      }
+
+      function getVal(n) {
+        const r = form.querySelector(`input[name="q${n}"]:checked`);
+        return r ? parseInt(r.value, 10) : 0;
+      }
+
+      form.addEventListener('change', (e) => {
+        if (e.target.type === 'radio') {
+          form.querySelectorAll(`input[name="${e.target.name}"]`).forEach((r) => {
+            r.closest('.ess-opt').classList.toggle('selected', r.checked);
+          });
+        }
+        const done = countAnswered() === TOTAL;
+        submitBtn.disabled    = !done;
+        hintEl.style.opacity  = done ? '0' : '1';
+      });
+
+      submitBtn.addEventListener('click', () => {
+        // Part 1: ESS (q1~q8)
+        let essScore = 0;
+        for (let i = 1; i <= 8; i++) essScore += getVal(i);
+
+        // Part 2: 특이 증상 (q9~q13)
+        const q9  = getVal(9);
+        const q10 = getVal(10);
+        const q11 = getVal(11);
+        const q12 = getVal(12);
+        const q13 = getVal(13);
+
+        const cataplexySuspected = q9 >= 2 || q10 >= 2;
+        const otherSymptoms = [];
+        if (q11 >= 2) otherSymptoms.push('수면마비');
+        if (q12 >= 2) otherSymptoms.push('입면 환각');
+        if (q13 >= 2) otherSymptoms.push('야간 수면 장애(기상 후 피로감)');
+
+        // Part 1 레벨
+        let essLevel, essMsg;
+        if (essScore <= 9) {
+          essLevel = 'normal';
+          essMsg   = '정상 범위입니다. 일상적인 졸림 수준이에요.';
+        } else if (essScore <= 15) {
+          essLevel = 'mild';
+          essMsg   = '졸림이 다소 있는 편입니다. 증상이 지속되면 수면 전문의 상담을 권장합니다.';
+        } else {
+          essLevel = 'severe';
+          essMsg   = '졸림이 상당히 심한 편입니다. 수면 전문의 상담을 강력 권장합니다.';
+        }
+
+        // Part 1 렌더
+        document.getElementById('sc-ess-score').textContent = essScore;
+        document.getElementById('sc-ess-msg').textContent   = essMsg;
+        const part1El = document.getElementById('sc-part1-result');
+        part1El.className = `sc-result-section sc-score--${essLevel}`;
+
+        // Part 2 플래그 렌더
+        const flagsEl = document.getElementById('sc-flags');
+        flagsEl.innerHTML = '';
+
+        if (cataplexySuspected) {
+          const f = document.createElement('div');
+          f.className = 'sc-flag sc-flag--warn';
+          f.innerHTML = '<strong>탈력발작 의심 증상</strong>이 관찰됩니다. 감정 자극 시 근육 힘이 빠지는 증상은 기면증 1형(NT1)의 특징적 증상입니다. 졸림 점수와 무관하게 수면 전문의 상담을 강력 권장합니다.';
+          flagsEl.appendChild(f);
+        }
+
+        if (otherSymptoms.length > 0) {
+          const f = document.createElement('div');
+          f.className = 'sc-flag sc-flag--info';
+          f.innerHTML = `<strong>${otherSymptoms.join(' · ')}</strong> 관련 증상도 있습니다. 종합적으로 전문의와 확인해보세요.`;
+          flagsEl.appendChild(f);
+        }
+
+        if (!cataplexySuspected && otherSymptoms.length === 0) {
+          const f = document.createElement('div');
+          f.className = 'sc-flag sc-flag--ok';
+          f.innerHTML = '기면증 특이 증상(탈력발작·수면마비·입면 환각)은 뚜렷하지 않습니다.';
+          flagsEl.appendChild(f);
+        }
+
+        // 종합 권고
+        const recEl = document.getElementById('sc-rec');
+        if (cataplexySuspected || essLevel === 'severe') {
+          recEl.textContent = '수면 전문의 상담을 강력 권장합니다.';
+          recEl.className   = 'sc-rec sc-rec--urgent';
+        } else if (essLevel === 'mild' || otherSymptoms.length > 0) {
+          recEl.textContent = '수면 전문의 상담을 권장합니다.';
+          recEl.className   = 'sc-rec sc-rec--recommend';
+        } else {
+          recEl.textContent = '현재는 뚜렷한 이상 징후가 없습니다. 증상이 지속되거나 일상생활에 지장이 생기면 전문의에게 확인하세요.';
+          recEl.className   = 'sc-rec sc-rec--normal';
+        }
+
+        resultBox.classList.add('is-visible');
+        smoothScrollTo(resultBox);
+      });
+
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+        form.querySelectorAll('.ess-opt').forEach((o) => o.classList.remove('selected'));
+        submitBtn.disabled   = true;
+        hintEl.style.opacity = '1';
+        resultBox.classList.remove('is-visible');
+        smoothScrollTo(form);
+      });
+
+      function smoothScrollTo(el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+    })();
+  </script>
+
+</body>
+</html>

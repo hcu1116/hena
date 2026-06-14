@@ -1828,13 +1828,19 @@ a.nav-dropdown-item:hover .item-ko {
 
 .signal-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 0.85rem;
 }
 
 .signal-cards--hospital {
   grid-template-columns: repeat(2, 1fr);
   max-width: 480px;
+}
+
+@media (max-width: 960px) {
+  .signal-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .signal-card {
@@ -1935,7 +1941,9 @@ a.nav-dropdown-item:hover .item-ko {
 }
 
 @media (max-width: 600px) {
-  .signal-cards,
+  .signal-cards {
+    grid-template-columns: 1fr;
+  }
   .signal-cards--hospital {
     grid-template-columns: 1fr;
     max-width: none;

@@ -17,16 +17,31 @@
       padding: var(--space-xl) 0 var(--space-lg);
       position: relative;
       background:
-        radial-gradient(ellipse 140% 55% at 50% -5%, rgba(14, 18, 48, 0.9) 0%, transparent 65%),
-        var(--color-bg);
+        linear-gradient(               /* 좌→우: 텍스트 쪽 강하게, 오른쪽은 열어줌 */
+          to right,
+          rgba(10, 10, 13, 0.97)  0%,
+          rgba( 5,  5,  8, 0.91) 35%,
+          rgba( 0,  0,  0, 0.55) 58%,
+          rgba( 0,  0,  0, 0.20) 100%
+        ),
+        linear-gradient(               /* 상→하: 상단 텍스트 강하게, 하단 손 영역은 열어줌 */
+          to bottom,
+          #131316                  0%,
+          rgba(19, 19, 22, 0.82) 12%,
+          rgba( 0,  0,  0, 0.50) 35%,
+          transparent             58%,
+          rgba(19, 19, 22, 0.50) 88%,
+          #131316                100%
+        ),
+        url('assets/images/mental-care-hero-bg.jpg') center bottom / contain no-repeat;
     }
 
-    /* 극소 blue hint — 여기는 없애도 되지만 살아있어 보이도록 */
+    /* blue hint 유지 — 텍스트 영역에 살짝 온기 */
     .mc-hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 70% 45% at 50% 35%, rgba(77, 158, 255, 0.025) 0%, transparent 65%);
+      background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(77, 158, 255, 0.03) 0%, transparent 70%);
       pointer-events: none;
     }
 

@@ -406,20 +406,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroECG();  // HENA Monitor 카드 파형
   initBgECG();    // 히어로 배경 선
 
-  // --- 7. 증상 카드 아코디언 ---
+  // --- 7. 증상 카드 독립 토글 ---
   const symptomCards = document.querySelectorAll('.symptom-card');
   if (symptomCards.length) {
     symptomCards.forEach((card) => {
       card.addEventListener('click', () => {
         const isOpen = card.classList.contains('is-open');
-        symptomCards.forEach((c) => {
-          c.classList.remove('is-open');
-          c.setAttribute('aria-expanded', 'false');
-        });
-        if (!isOpen) {
-          card.classList.add('is-open');
-          card.setAttribute('aria-expanded', 'true');
-        }
+        card.classList.toggle('is-open', !isOpen);
+        card.setAttribute('aria-expanded', String(!isOpen));
       });
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {

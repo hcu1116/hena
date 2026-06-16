@@ -26,6 +26,10 @@ Live → https://hcu1116.github.io/hena/
 ▸ 실제 데이터 분석 — PhysioNet 웨어러블 수면 데이터 기반 ML 파이프라인 구현
 ▸ 마음 돌봄 — 기면증 동반 정신건강 문제(우울·불안)에 대한 정보 공간 제공
 
+![기면증 주요 증상 인터랙티브 카드](docs/screenshots/screenshot-symptoms.png)
+
+![환자 정신건강을 위한 마음 돌봄 공간](docs/screenshots/screenshot-mentalcare.png)
+
 ## 기술 스택 (Tech Stack)
 
 Frontend: HTML · CSS · JavaScript (Vanilla)
@@ -38,8 +42,12 @@ PhysioNet sleep-accel 데이터셋(7명)으로 RandomForest 기반 수면단계 
 단일 피험자 랜덤 분리 기준 68.9%, Leave-One-Out 교차검증(진짜 일반화 성능) 기준 평균 40.9%.
 HRV 피처(RMSSD·SDNN·pNN50) 추가 시 42.8%로 소폭 개선됨을 확인했습니다.
 
+![일반인 vs 기면증 실시간 HRV 비교 시뮬레이션](docs/screenshots/screenshot-simulation.png)
+
 한계: 웨어러블 HRV는 임상 PSG 수준의 HRV와 다르며, 7명 소규모 데이터라 일반화에 한계가 있습니다.
 상세 코드 및 분석 과정은 `learning/06_realdata` 참고.
+
+![ESS·SNS 기반 졸음 자가 체크](docs/screenshots/screenshot-selfcheck.png)
 
 ## 프로젝트 구조 (Structure)
 

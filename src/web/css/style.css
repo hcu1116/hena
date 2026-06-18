@@ -1287,6 +1287,7 @@ a.nav-dropdown-item:hover .item-ko {
   font-weight: 500;
   align-self: flex-end;
   padding-bottom: 0.35em;
+  white-space: nowrap;
 }
 
 .stat-label {
@@ -2807,11 +2808,13 @@ canvas.sim-canvas {
   .stat-item {
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding: 1.8rem var(--space-md);
+    padding: 1.8rem 1.25rem;
   }
 
-  .stat-item.featured .stat-count { font-size: clamp(3rem, 8vw, 4rem); }
-  .stat-item.featured .stat-unit  { font-size: 1.2rem; }
+  .stat-item.featured .stat-count  { font-size: clamp(2rem, 5.5vw, 2.5rem); }
+  .stat-item.featured .stat-unit   { font-size: 1.1rem; }
+  .stat-item.featured .stat-prefix { font-size: 1.1rem; }
+  .stat-number { flex-wrap: nowrap; }
   .disease-grid { grid-template-columns: 1fr; }
 }
 

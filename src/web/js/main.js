@@ -365,7 +365,37 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach((s) => tocObserver.observe(s));
   }
 
-  // --- 5. 질환 정보 드롭다운 ---
+  // --- 5. 모바일 햄버거 메뉴 ---
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks  = document.querySelector('.nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('is-open');
+      navLinks.classList.toggle('is-open', !isOpen);
+      hamburger.setAttribute('aria-expanded', String(!isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? '메뉴 열기' : '메뉴 닫기');
+    });
+
+    // 메뉴 항목 클릭 시 자동 닫힘
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', '메뉴 열기');
+      });
+    });
+
+    // 바깥 클릭 시 닫힘
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', '메뉴 열기');
+      }
+    });
+  }
+
+  // --- 6. 질환 정보 드롭다운 ---
   const dropdowns = document.querySelectorAll('.nav-dropdown');
   dropdowns.forEach((dropdown) => {
     const trigger = dropdown.querySelector('.nav-dropdown-trigger');
@@ -402,11 +432,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- 6. ECG 파형 초기화 ---
+  // --- 7. ECG 파형 초기화 ---
   initHeroECG();  // HENA Monitor 카드 파형
   initBgECG();    // 히어로 배경 선
 
-  // --- 7. 증상 카드 독립 토글 ---
+  // --- 8. 증상 카드 독립 토글 ---
   const symptomCards = document.querySelectorAll('.symptom-card');
   if (symptomCards.length) {
     symptomCards.forEach((card) => {
